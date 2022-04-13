@@ -2364,7 +2364,7 @@ def getnamebypid(pid, name):
             ret = basename(cmdline[1])
         if ret.startswith('-'):
             ret = basename(cmdline[-2])
-            if ret.startswith('-'): raise
+            #if ret.startswith('-'): raise
         if not ret: raise
     except:
         ret = basename(name)
