@@ -24,6 +24,7 @@ import getopt
 import getpass
 import glob
 import linecache
+import math
 import os
 import re
 import resource
@@ -79,6 +80,7 @@ class Options:
         self.update       = True
         self.header       = True
         self.output       = False
+        self.unbuffered   = False
         self.pidfile      = False
         self.profile      = ''
 
@@ -102,11 +104,11 @@ class Options:
         }
 
         try:
-            opts, args = getopt.getopt(args, 'acdfghilmno:prstTvyC:D:I:M:N:S:V',
+            opts, args = getopt.getopt(args, 'acdfghilmno:uprstTvyC:D:I:M:N:S:V',
                 ['all', 'all-plugins', 'bits', 'bw', 'bytes', 'black-on-white', 'color',
                  'defaults', 'debug', 'filesystem', 'float', 'full', 'help', 'integer',
                  'list', 'mods', 'modules', 'more', 'nocolor', 'noheaders', 'noupdate',
-                 'output=', 'pidfile=', 'profile', 'version', 'vmstat'] + allplugins)
+                 'output=', 'unbuffered', 'pidfile=', 'profile', 'version', 'vmstat'] + allplugins)
         except getopt.error as exc:
             print('dool: %s, try dool -h for a list of all the options' % exc)
             sys.exit(1)
@@ -198,6 +200,8 @@ class Options:
                 self.update = False
             elif opt in ['-o', '--output']:
                 self.output = arg
+            elif opt in ['-u', '--unbuffered']:
+                self.unbuffered = True
             elif opt in ['--pidfile']:
                 self.pidfile = arg
             elif opt in ['--profile']:
@@ -336,6 +340,7 @@ Dool options:
   --noheaders              disable repetitive headers
   --noupdate               disable intermediate updates
   --output file            write CSV output to file
+  --unbuffered             do not buffer writes to the output file
   --profile                show profiling statistics when exiting dool
 
 delay is the delay in seconds between each update (default: 1)
@@ -825,7 +830,7 @@ class dool_disk(dstat):
         ret = []
         for l in self.splitlines():
             if len(l) < 13: continue
-            if l[3:] == ['0',] * 11: continue
+            if set(l[3:]) == {'0'}: continue
             name = l[2]
             ret.append(name)
         for item in objlist: ret.append(item)
@@ -882,7 +887,7 @@ class dool_disk(dstat):
             if len(l) < 13: continue
             if l[5] == '0' and l[9] == '0': continue
             name = l[2]
-            if l[3:] == ['0',] * 11: continue
+            if set(l[3:]) == {'0'}: continue
             if not self.diskfilter.match(name):
                 self.set2['total'] = ( self.set2['total'][0] + int(l[5]), self.set2['total'][1] + int(l[9]) )
             if name in self.vars and name != 'total':
@@ -1248,7 +1253,7 @@ class dool_io(dstat):
         ret = []
         for l in self.splitlines():
             if len(l) < 13: continue
-            if l[3:] == ['0',] * 11: continue
+            if set(l[3:]) == {'0'}: continue
             name = l[2]
             ret.append(name)
         for item in objlist: ret.append(item)
@@ -1284,7 +1289,7 @@ class dool_io(dstat):
             if len(l) < 13: continue
             if l[3] == '0' and l[7] == '0': continue
             name = l[2]
-            if l[3:] == ['0',] * 11: continue
+            if set(l[3:]) == {'0'}: continue
             if not self.diskfilter.match(name):
                 self.set2['total'] = ( self.set2['total'][0] + int(l[3]), self.set2['total'][1] + int(l[7]) )
             if name in self.vars and name != 'total':
@@ -2094,6 +2099,9 @@ def dchg(var, width, base):
     "Convert decimal to string given base and length"
     c = 0
     while True:
+        if math.isinf(var):
+            ret = 'Inf'
+            break
         ret = str(int(round(var)))
         if len(ret) <= width:
             break
@@ -2228,9 +2236,12 @@ def cprint(var, ctype = 'f', width = 4, scale = 1000):
 
     ### Add unit to output
     if unit:
-        if c != -1 and round(var) != 0:
-            ret += cunit + units[c]
-        else:
+        try:
+            if c != -1 and round(var) != 0:
+                ret += cunit + units[c]
+            else:
+                ret += char['space']
+        except OverflowError:
             ret += char['space']
 
     return ret
@@ -2620,15 +2631,19 @@ def main():
     if op.color == None:
         op.color = gettermcolor()
 
-    ### Prepare CSV output file (unbuffered)
+    ### Prepare CSV output file
+    buffering = -1
+    if op.unbuffered:
+        # enforce line buffering
+        buffering = 1
     if op.output:
         if not os.path.exists(op.output):
-            outputfile = open(op.output, 'w')
+            outputfile = open(op.output, 'w', buffering=buffering)
             outputfile.write('"Dstat %s CSV output"\n' % VERSION)
             header = ('"Author:","Dag Wieers <dag@wieers.com>"','','','','"URL:"','"http://dag.wieers.com/home-made/dstat/"\n')
             outputfile.write(char['sep'].join(header))
         else:
-            outputfile = open(op.output, 'a')
+            outputfile = open(op.output, 'a', buffering=buffering)
             outputfile.write('\n\n')
 
         header = ('"Host:"','"%s"' % hostname,'','','','"User:"','"%s"\n' % user)
