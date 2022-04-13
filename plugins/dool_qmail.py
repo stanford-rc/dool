@@ -1,8 +1,8 @@
 ### Author: Tom Van Looy <tom$ctors,net>
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
-    port of qmail_qstat to dstat
+    port of qmail_qstat to dool
     """
     def __init__(self):
         self.name = 'qmail'

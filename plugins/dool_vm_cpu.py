@@ -1,10 +1,10 @@
-### Author: Bert de Bruijn <bert+dstat$debruijn,be>
+### Author: Bert de Bruijn <bert+dool$debruijn,be>
 
 ### VMware cpu stats
 ### Displays CPU stats coming from the hypervisor inside VMware VMs.
 ### The vmGuestLib API from VMware Tools needs to be installed
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     def __init__(self):
         self.name = 'vm cpu'
         self.vars = ('used', 'stolen', 'elapsed')

@@ -1,8 +1,8 @@
-= Dstat: pluggable real-time monitoring
+= Dool: pluggable real-time monitoring
 Dag Wieers <dag@wieers.com>
 $Id$
 
-'This Dstat paper was originally written for LinuxConf Europe that was
+'This Dool paper was originally written for LinuxConf Europe that was
 held together with the Linux Kernel summit at the University in Cambridge,
 UK in August 2007.'
 
@@ -11,7 +11,7 @@ UK in August 2007.'
 Many tools exist to monitor hardware resources and software behaviour, but few
 tools exist that allow you to easily monitor any conceivable counter.
 
-Dstat was designed with the idea that it should be simple to plug in a piece
+Dool was designed with the idea that it should be simple to plug in a piece
 of code that extracts one or more counters, and make it visible in a way that
 visually pleases the eye and helps you extract information in real-time.
 
@@ -20,7 +20,7 @@ counters that matter to you in the job you're doing) you make it easier to
 correlate raw numbers and see a pattern that may otherwise not be visible.
 
 
-== A case for Dstat
+== A case for Dool
 A few years ago I was involved in a project that was testing a storage cluster
 with a SAN back-end using GPFS and Samba for a broadcasting company. The
 performance tests that were scheduled together with the customer took a few
@@ -46,7 +46,7 @@ and using the normal command line tools like vmstat, iostat or ifstat (which
 only showed us a small part of what was happening) was problematic as each
 needed a different terminal. Besides, not all information was interesting.
 
-Eventually Dstat was born, to make a dull task more enjoyable.
+Eventually Dool was born, to make a dull task more enjoyable.
 
 After the project was finished I was able to correlate system resources with
 network throughput, TCP information, Samba sessions, GPFS throughput,
@@ -54,8 +54,8 @@ accumulated block device throughput, HBA throughput, all within a single
 interval on one screen for the complete cluster.
 
 
-== Dstat characteristics
-There are many ideas incorporated into Dstat by design, and this section
+== Dool characteristics
+There are many ideas incorporated into Dool by design, and this section
 serves to list all of them. Not all of them may appeal to the task you're
 doing, but the combination may make it an appealing proposition nevertheless.
 
@@ -98,7 +98,7 @@ over some pre-defined limit.
 
 === Intermediate updates
 During tests, when you choose to see average values over a given time, it can
-be useful to see how the averages evolve. Dstat, by default, displays
+be useful to see how the averages evolve. Dool, by default, displays
 intermediate updates. This means that if you select to see 10 second averages,
 after each second you see the accumulated average over the timespan. *This
 means that after 4 seconds with intermediate updates, you see an average
@@ -109,7 +109,7 @@ the more likely that it nears its final average over that period.
 
 
 === Adding custom counters
-Dstat was specifically designed to enable anyone to add their own counters in a
+Dool was specifically designed to enable anyone to add their own counters in a
 matter of minutes. The plugin-based system takes care of displaying, colouring
 and adding units to the counters. As a plugin-writer, you only have to focus
 on extracting the counters from the kernel (procfs or sysfs), logfiles or
@@ -121,7 +121,7 @@ Being able to add custom counters is important, but selecting those counters
 that you really need is even more important if you want to correlate counters
 and see patterns. Less is more.
 
-NOTE: In fact, Dstat currently does not allow you to select just counters, it
+NOTE: In fact, Dool currently does not allow you to select just counters, it
 only allows you to select plugins. However, since you can modify or fork a
 plugin, you still have the ability to select just those counters you prefer.
 
@@ -130,13 +130,13 @@ plugin, you still have the ability to select just those counters you prefer.
 Having information on screen is one thing, you most likely need some hard
 evidence later to make your case. (Why else do all the work?)
 
-Dstat allows to write out all counters in the greatest detail possible to CSV.
+Dool allows to write out all counters in the greatest detail possible to CSV.
 By default it also adds the command-line used for generating the output, as
-well as a date and time stamp. Since Dstat in the first place is meant for
+well as a date and time stamp. Since Dool in the first place is meant for
 human-readable real-time statistics, it will by default also display the
 counters to screen (unless you _/dev/null_ it).
 
-TIP: Dstat appends to the output file so that you can add tests-results of
+TIP: Dool appends to the output file so that you can add tests-results of
 different tests to a single file. However, make sure that you tag each test
 properly (eg. by using distinct filenames for each different test).
 
@@ -144,45 +144,45 @@ properly (eg. by using distinct filenames for each different test).
 === Time-plugin included
 It may seem a small thing, but having exact time (and date) information for
 your counters allows for a completely different usage as well. By adding
-simple date and time information, Dstat can be used as a background process in
+simple date and time information, Dool can be used as a background process in
 a screen to monitor the behaviour of your system during the night.
 
 This proves to be very valuable for example, to find offending processes during
 nightly tasks or to pinpoint their behaviour to certain events that you cannot
 monitor during working hours.
 
-It is also important when you have multiple Dstats running (eg. for nodes in a
+It is also important when you have multiple Dools running (eg. for nodes in a
 cluster) to correlate counters between the outputs.
 
 
 === Terminal capabilities
-Dstat also takes into account the width and height of your terminal window and
+Dool also takes into account the width and height of your terminal window and
 modifies output to fit into your terminal. This, of course, has no effect on
 what ends up in the CSV output.
 
-Another (debatable) useful feature is that Dstat will modify the terminal
+Another (debatable) useful feature is that Dool will modify the terminal
 title to indicate on what system it was run and what options were used.
 Especially when monitoring nodes in a cluster, this can be useful, but even in
-Gnome finding your Dstat window is handy.
+Gnome finding your Dool window is handy.
 
 WARNING: Some people however are annoyed by the fact that their distribution
-does not reset the terminal title and Dstat therefor messes it up. There is no
-way for Dstat to fix this.
+does not reset the terminal title and Dool therefor messes it up. There is no
+way for Dool to fix this.
 
 
 == Plugins and counters
 When we talk about plugins, we make a distinction between those plugins that
-are included within the Dstat tool itself, and those that ship with it
+are included within the Dool tool itself, and those that ship with it
 externally.  In essence there is no real difference, as the internal plugins
 could easily have been created as an external plugin. The basic difference is
 that the internal plugins have no dependencies except on procfs.
 
-Having the basic plugins as part of Dstat, makes sure that Dstat can be moved
+Having the basic plugins as part of Dool, makes sure that Dool can be moved
 as a self-contained file to other systems.
 
 
 === Internal plugins
-The plugins that have been selected to be part of the Dstat tool itself, and
+The plugins that have been selected to be part of the Dool tool itself, and
 therefor have no dependencies other than procfs, are:
 
     - aio: asynchronous I/O counters
@@ -211,14 +211,14 @@ therefor have no dependencies other than procfs, are:
 
 For backward compatibility with older kernels there is a cascading system that
 selects the most appropriate internal plugin for your kernel. (eg. the
-+dstat_disk+ plugin falls back to +dstat_disk24+ and +dstat_disk24old+) At this
++dool_disk+ plugin falls back to +dool_disk24+ and +dool_disk24old+) At this
 moment there is no such system for external plugins.
 
 
 === External plugins
 This basic functionality is easily extended by writing your own plugins
-(subclasses of the python Dstat class) which are then inserted at runtime
-into Dstat. A set of 'external' modules exist for:
+(subclasses of the python Dool class) which are then inserted at runtime
+into Dool. A set of 'external' modules exist for:
 
     - battery: battery usage
     - battery-remain: remaining battery time
@@ -226,10 +226,10 @@ into Dstat. A set of 'external' modules exist for:
     - dbus: DBUS connections
     - disk-tps: disk transactions counters
     - disk-util: disk utilization percentage
-    - dstat: dstat cputime consumption and latency
-    - dstat-cpu: dstat advanced cpu usage
-    - dstat-ctxt: dstat context switches
-    - dstat-mem: dstat advanced memory usage
+    - dool: dool cputime consumption and latency
+    - dool-cpu: dool advanced cpu usage
+    - dool-ctxt: dool context switches
+    - dool-mem: dool advanced memory usage
     - fan: Fan speed
     - freespace: free space on filesystems
     - gpfs: GPFS IO counters
@@ -259,7 +259,7 @@ into Dstat. A set of 'external' modules exist for:
     - rpc: RPC client counters
     - rpcd: RPC server counters
     - sendmail: sendmail queue counters
-    - snooze: Dstat time delay counters
+    - snooze: Dool time delay counters
     - squid: squid usage statistics
     - thermal: Thermal counters
     - top-bio: most expensive block I/O process
@@ -296,20 +296,20 @@ would be ``very nice'' to have but are currently lacking:
     - samba: lacking information to get counters from Samba without
       forking smbstatus every second
     - snmp: could be useful to relate counters from different systems
-      in a single Dstat
+      in a single Dool
     - topx: display the most expensive X application(s)
-    - systemtap: connecting Dstat to systemtap counters
+    - systemtap: connecting Dool to systemtap counters
 
 Creative souls with other ideas are welcome as well !
 
 
-== Using Dstat
-Central to the Dstat command line interface is the selection of plugins. The
-selection and order of options influence the Dstat output directly.
+== Using Dool
+Central to the Dool command line interface is the selection of plugins. The
+selection and order of options influence the Dool output directly.
 
 
 === Enabling plugins
-The internal plugins have short and/or long options within Dstat, eg. +-c+ or
+The internal plugins have short and/or long options within Dool, eg. +-c+ or
 +--cpu+ will enable the cpu counters.
 
 The external plugins are enable by a long option including their name,
@@ -319,8 +319,8 @@ The following examples will enable the time, cpu and disk plugins, and are
 equal.
 
 ----
-dstat -tcd
-dstat --time --cpu --disk
+dool -tcd
+dool --time --cpu --disk
 ----
 
 === Total or individual counters
@@ -328,15 +328,15 @@ Some of the plugins can show both total values or individual values and
 therefor have an extra option to influence this decision.
 
 ----
-dstat -d -D sda,sdb
-dstat -n -N eth0,eth1
-dstat -c -C total,0,1
+dool -d -D sda,sdb
+dool -n -N eth0,eth1
+dool -c -C total,0,1
 ----
 
 You can show both the individual values and total values as follows:
 
 ----
-[dag@horsea ~]$ dstat -d -D total,hda,hdc
+[dag@horsea ~]$ dool -d -D total,hda,hdc
 -dsk/total----dsk/hda-----dsk/hdc--
  read  writ: read  writ: read  writ
 1384k 1502k: 114k 1332k:  81k  359B
@@ -349,29 +349,29 @@ default, and can be overruled by +-C+, +-D+, +-I+, +-N+ or +-S+.
 
 
 === Influencing output
-Dstat has a few more options to influence its output. With the +--nocolor+
+Dool has a few more options to influence its output. With the +--nocolor+
 one can disable colours. The +--noheaders+ option disables repeating headers.
 The +--noupdate+ option disables intermediate updates. The +--output+ option
 is used for writing out to a CSV file.
 
 
 === Plugin search path
-Dstat looks in the following places for plugins. This allows a user without
+Dool looks in the following places for plugins. This allows a user without
 root privileges to use some extra plugins.
 
-    - ~/.dstat/
+    - ~/.dool/
     - <binarypath>/plugins/
-    - /usr/share/dstat/
-    - /usr/local/share/dstat/
+    - /usr/share/dool/
+    - /usr/local/share/dool/
 
 The option +--list+ shows the available plugins and their location in the
 order that the plugin search path is used.
 
-NOTE: Plugins are named +dstat_<name>.py+.
+NOTE: Plugins are named +dool_<name>.py+.
 
 
 == Use-cases
-Below are some use-cases to demonstrate the usage of Dstat.
+Below are some use-cases to demonstrate the usage of Dool.
 
 WARNING: The following examples do not look as nice as they do on screen
 because this document is not printed in colour (and I did not prepare it in
@@ -383,12 +383,12 @@ Let's say you quickly want to see if the system is doing alright. In the past
 this probably was a +vmstat 1+, as of now you would do:
 
 ----
-dstat -taf
+dool -taf
 ----
 
 .Sample output
 ----
-[dag@rhun dag]$ dstat -taf
+[dag@rhun dag]$ dool -taf
 -----time----- -------cpu0-usage------ --dsk/sda-----dsk/sr0-- --net/eth1- ---paging-- ---system--
   date/time   |usr sys idl wai hiq siq| read  writ: read  writ| recv  send|  in   out | int   csw 
 02-08 02:42:48| 10   2  85   2   0   0|  22k   23k: 1.8B    0 |   0     0 |2588B 2952B| 558   580 
@@ -405,14 +405,14 @@ nevertheless interesting.
 
 
 === What is this system doing now ?
-I often run both the +dstat_top_cpu+ and +dstat_top_mem+ programs on a system,
+I often run both the +dool_top_cpu+ and +dool_top_mem+ programs on a system,
 just to see what a system is doing. Having a quick look at what application
 is using the most CPU over a few minutes and to see what the general usage
 of memory is of the top application gives away a lot about a system.
 
 .Sample output
 ----
-[dag@horsea dag]$ dstat -c --top-cpu -dng --top-mem
+[dag@horsea dag]$ dool -c --top-cpu -dng --top-mem
 ----total-cpu-usage---- -most-expensive- -dsk/total- -net/total- ---paging-- -most-expensive-
 usr sys idl wai hiq siq|  cpu process   | read  writ| recv  send|  in   out | memory process 
   9   2  80   9   0   0|kswapd         0| 123k  164k|   0     0 |9196B   18k|rsync        74M
@@ -432,9 +432,9 @@ Something indicates the system is doing something unexpected but what is
 causing it and why ? As of now you can do:
 
 ----
-screen dstat -tcy --top-cpu 120
-screen dstat -tmgs --top-mem 120
-screen dstat -tdi --top-io 120
+screen dool -tcy --top-cpu 120
+screen dool -tmgs --top-mem 120
+screen dool -tdi --top-io 120
 ----
 
 to see what process is using the most CPU, the most memory and the most I/O
@@ -443,8 +443,8 @@ resources.
 And hopefully one day we can do:
 
 ----
-dstat -tn --top-net 120
-dstat -tn --top-x 120
+dool -tn --top-net 120
+dool -tn --top-x 120
 ----
 
 Leave it running during the night and in the morning you can see the light.
@@ -458,23 +458,23 @@ Also on VMware virtual machines, the number of ticks can cause clock issues,
 so in that case if you want to see what is happening, you can simply do:
 
 ----
-dstat -ti -I0 --snooze --debug
+dool -ti -I0 --snooze --debug
 ----
 
-Dstat nowadays can also detect lost ticks (when the number of ticks do not
+Dool nowadays can also detect lost ticks (when the number of ticks do not
 match the time progress. This is useful to correlate VM issues with other
 problems.
 
 
 ////
 === Monitoring memory consumption of a process over time
-Now, I have twice used Dstat to verify memory usage. And I have concluded that
+Now, I have twice used Dool to verify memory usage. And I have concluded that
 2 programs have severe memory leaks. One, unsurprisingly, is Firefox, the
 other sadly is wnck-applet (yes, unfortunately).
 
-Now Dstat is currently not really useful for specifying your own process to
+Now Dool is currently not really useful for specifying your own process to
 monitor (unless you dig into the module, which is easier than one might
-expect). But I am already anticipating Pstat, which is a Dstat but for
+expect). But I am already anticipating Pstat, which is a Dool but for
 process-related counters.
 
 More on this later...
@@ -482,7 +482,7 @@ More on this later...
 
 
 === What device is slowing down my system ?
-A nice feature of Dstat is that it can show how many interrupts each of your
+A nice feature of Dool is that it can show how many interrupts each of your
 devices is generating. The 'cpu' stats already show this in percentage as
 'hard interrupt' and 'soft interrupt', and the 'sys' stats shows the total
 number of interrupts, but the 'int' stats go into detail. And you can specify
@@ -493,20 +493,20 @@ Sometimes too many interrupts can slow down a system. If you want to correlate
 bad performance with hardware interrupts, you can run a command like:
 
 ----
-dstat -tyif
-dstat -tyi -I 12,58,iwlagn -f 5
+dool -tyif
+dool -tyi -I 12,58,iwlagn -f 5
 ----
 Much like +watch -n1 -d cat /proc/interrupts+ on steroids.
 
 ----
-dstat -t -y -i -f
+dool -t -y -i -f
 ----
 
 which then results in:
 
 .Sample output
 ----
-[dag@rhun ~]$ dstat -t -y -i -f 5
+[dag@rhun ~]$ dool -t -y -i -f 5
 -----time----- ---system-- -------------------interrupts------------------
   date/time   | int   csw |  1     9     12    14    15    58   177   185 
 13-08 21:52:53| 740   923 |   1     0    18     5     1    17     4   131 
@@ -539,14 +539,14 @@ MIS:          0
 Or select specific interrupts:
 
 ----
-dstat -t -y -i -I 12,58,185 -f 5
+dool -t -y -i -I 12,58,185 -f 5
 ----
 
 Another possibility is to use the +--top-int+ plugin, showing you the most
 frequent plugin on your system:
 
 ----
-[dag@rhun ~]# dstat -t --top-int
+[dag@rhun ~]# dool -t --top-int
 ----system---- ---most-frequent----
      time     |     interrupt      
 11-06 08:34:53|ahci              5 
@@ -562,34 +562,34 @@ WIFI access point. However I must say that another tool I wrote 'Dwscan' is
 currently more sophisticated.
 
 ----
-dstat -t --wifi
+dool -t --wifi
 ----
 
 === Is my SWRAID performing as it claims ?
-You can monitor I/O throughput for any block device. By default dstat limits
+You can monitor I/O throughput for any block device. By default dool limits
 itself to real block devices to prevent having the same I/O to be counted more
 than once, but if you want to monitor a SWRAID device, or a multipath device,
 you can simply do that by doing:
 
 ----
-dstat -td -D md0,md1,sda,sdb,hda
+dool -td -D md0,md1,sda,sdb,hda
 ----
 
 
-== Writing your own Dstat plugin
-Dstat is completely written in python and this makes it extremely convenient
-to write your own plugins. The many plugins that come with Dstat are an
+== Writing your own Dool plugin
+Dool is completely written in python and this makes it extremely convenient
+to write your own plugins. The many plugins that come with Dool are an
 excellent source of information if you want to write your own.
 
 === Introducing the hello world plugin
 The following plugin does nothing more than write "Hello world!" to its
 output.
 
-.The dstat_helloworld plugin in its full glory.
+.The dool_helloworld plugin in its full glory.
 ----
-class dstat_helloworld(dstat):
+class dool_helloworld(dool):
     ``"
-    Example "Hello world!" output plugin for aspiring Dstat developers.
+    Example "Hello world!" output plugin for aspiring Dool developers.
     ``"
     def __init__(self):
         self.name = 'plugin title'          <1>
@@ -619,9 +619,9 @@ The following example shows how information is collected and counters are
 processed. It also includes a +check()+ method to properly bail out when the
 system fails to meet some plugin criteria.
 
-.The dstat_postfix plugin
+.The dool_postfix plugin
 ----
-class dstat_postfix(dstat):
+class dool_postfix(dool):
     def __init__(self):
         self.name = 'postfix'
         self.nick = ('inco', 'actv', 'dfrd', 'bnce', 'defr')
@@ -649,7 +649,7 @@ This example shows the following items:
 
 
 === Opening files
-Dstat provides its own +dopen()+ function to plugins. Using +dopen()+ instead
+Dool provides its own +dopen()+ function to plugins. Using +dopen()+ instead
 of +open()+ plugins do not need to reopen files to update their counters. But
 this is only useful when plugins open a few files. For eg. opening _/proc/pid_
 files the number of open files would only be increasing as the number of
@@ -657,20 +657,20 @@ processes increases.
 
 
 === Piping to an application
-Dstat provides its own +dpopen()+ function to plugins. This function allows
+Dool provides its own +dpopen()+ function to plugins. This function allows
 the plugin to open stdin, stdout and stderr pipes for 2-way communication with
-processes.  To see this in action, take a look at the +dstat_gpfs+ plugins or
-the +dstat_mysql+ plugins.
+processes.  To see this in action, take a look at the +dool_gpfs+ plugins or
+the +dool_mysql+ plugins.
 
 Piping to an application is more expensive than getting kernel counters from
 _/proc_, but it beats having to run a program and capturing the output.
 
 
 == Known issues
-There are some known issues that are important to understand when using Dstat.
+There are some known issues that are important to understand when using Dool.
 
-=== Writing Dstat and plugins in C
-It makes sense to reimplement Dstat or some of its plugins in C and still
+=== Writing Dool and plugins in C
+It makes sense to reimplement Dool or some of its plugins in C and still
 allow the writing of Python (or even Perl) plugins. Tests have shown that for
 example processing _/proc/pid_ in C makes the plugin 3 times faster. And this
 did not take into account the processing of the results and displaying the
@@ -680,7 +680,7 @@ So rewriting in C makes a lot of sense, but it is also much more complicated.
 
 
 === Python 1.5
-There used to be a Python 1.5 version of Dstat, but with RHEL2 going out of
+There used to be a Python 1.5 version of Dool, but with RHEL2 going out of
 support in 2009 I decided to no longer spend the extra effort to sync and test
 the Dstat15 version.
 
@@ -690,7 +690,7 @@ a major overhaul was made to the plugin interface.
 
 
 === Counter rollovers
-Unfortunately Dstat is susceptible for counters that ``rollover''. This means
+Unfortunately Dool is susceptible for counters that ``rollover''. This means
 that a counter gets bigger than its maximum value the data-structure is capable
 of storing. As a result the counter is reset.
 
@@ -702,29 +702,29 @@ that is being transferred over the network will cause a counter reset. For
 example on a bonded 2x10Gbps interfaces that is using its theoretical transfer
 limit, this would happen every 1.6 seconds.
 
-Since _/proc_ is updated every second, this would be impossible for Dstat to
-catch. Currently if Dstat encounters a negative difference for an interval it
+Since _/proc_ is updated every second, this would be impossible for Dool to
+catch. Currently if Dool encounters a negative difference for an interval it
 assumes a single rollover has happened and compensates for it. If that
 assumption is wrong, the user is working with wrong counters nonetheless.
 
 If you suspect that the behaviour of your system is susceptible of counter
-rollovers, make sure you take this into account when using Dstat (or any other
+rollovers, make sure you take this into account when using Dool (or any other
 tool that uses these counters for that matter).
 
-TIP: Shipped with the Dstat documentation there is a document
+TIP: Shipped with the Dool documentation there is a document
 (_counter-rollovers.txt_) that goes deeper into counter rollovers. If this
 affects you, read that document and contact me for possible implementation
 changes to improve handling them.
 
 
-== Dstat performance
-As mentioned several times now, Dstat is written in python. There are various
+== Dool performance
+As mentioned several times now, Dool is written in python. There are various
 reasons that Python was chosen and the most important reason is that we target
 system engineers and users, so we need to simplify writing plugins, processing
 counters and lowers the bar for people to contribute changes.
 
 The downside of choosing a scripting language is that it is slower than if it
-would be written in C, obviously. *Dstat is not optimised for performance.*
+would be written in C, obviously. *Dool is not optimised for performance.*
 
 NOTE: This may seem ironic: a performance monitoring tool that is not
 optimised for performance, but rather for flexibility. However the ease of
@@ -736,40 +736,40 @@ plugin development.
 
 === Plugin performance
 If we look at the basic plugins, there are no real performance issues with
-Dstat. Loading Dstat takes longer to start than eg. vmstat, but once running,
-Dstat's performance for the same functionality is up to par with vmstat,
+Dool. Loading Dool takes longer to start than eg. vmstat, but once running,
+Dool's performance for the same functionality is up to par with vmstat,
 ifstat and other similar tools.
 
 However there are *some plugins that are much more resource intensive than
-others* and the selection of plugins determines Dstat's performance in a major
+others* and the selection of plugins determines Dool's performance in a major
 way.
 
 
-=== Performance monitoring Dstat
-Dstat comes with some plugins (starting with +dstat_+) to check the overhead
+=== Performance monitoring Dool
+Dool comes with some plugins (starting with +dool_+) to check the overhead
 of itself, this together with the selection of plugins makes it very
 convenient to measure the overhead of individual plugins. The following
 options exist (as plugins):
 
---dstat::
-Provides cputime and latency information for Dstat. This plugin can help you
-determine how accurate and how much overhead Dstat has with its current
+--dool::
+Provides cputime and latency information for Dool. This plugin can help you
+determine how accurate and how much overhead Dool has with its current
 plugins enabled.
 
---dstat-cpu::
-Provides cpu utilization (user-space and kernel-space) statistics for Dstat.
+--dool-cpu::
+Provides cpu utilization (user-space and kernel-space) statistics for Dool.
 This plugin can help determine where there is some room for improvement for
-individual plugins (or Dstat itself).
+individual plugins (or Dool itself).
 
---dstat-ctxt::
-Provides context switch information for Dstat. Both voluntary as well ass
+--dool-ctxt::
+Provides context switch information for Dool. Both voluntary as well ass
 involuntary context switches are shown, providing you with some idea of how
-the system is providing timeslices and how Dstat is returning the cpu to the
+the system is providing timeslices and how Dool is returning the cpu to the
 system.
 
---dstat-mem::
-Provides memory information about the Dstat process. This plugin enables
-plugin developers to determine whether Dstat is increasing its memory usage
+--dool-mem::
+Provides memory information about the Dool process. This plugin enables
+plugin developers to determine whether Dool is increasing its memory usage
 and therefor is 'leaking' memory over time. This plugin proved very useful in
 optimizing memory usage of the top-plugins, which typically scan all
 processes.
@@ -781,29 +781,29 @@ calculated. So the output of this plugin is very dependant on the location on
 the command-line.
 
 --debug::
-This option is not a plugin, but internal to Dstat. It will cause Dstat to
+This option is not a plugin, but internal to Dool. It will cause Dool to
 show the actual time in milliseconds from start to end at the end of each
-line. This should be more or less close to the output of the +dstat_dstat+ and
-+dstat_dstat_cpu+ plugins.
+line. This should be more or less close to the output of the +dool_dool+ and
++dool_dool_cpu+ plugins.
 +
-It also influences the internal +dstat_time+ plugin to show milliseconds
-instead of seconds, which may help showing the accuracy of Dstat itself.
+It also influences the internal +dool_time+ plugin to show milliseconds
+instead of seconds, which may help showing the accuracy of Dool itself.
 
 --profile::
-Ths option is also not a plugin, but internal to Dstat. It provides you with
+Ths option is also not a plugin, but internal to Dool. It provides you with
 detailed profiling information at the end of each run. The default settings
-can be changed inside Dstat (or a copy) to tweak the output you are looking
+can be changed inside Dool (or a copy) to tweak the output you are looking
 for. It creates a termporary profiling file in the current directory when
 running, but will clean it up after exit.
 
-// FIXME: Please improve the examples by using the --dstat plugins
+// FIXME: Please improve the examples by using the --dool plugins
 === Measuring plugins
 Here is a small example of how one can measure the impact of a plugin.
 
 .The cost of running the timer plugin
 ----
-[dag@rhun dag]$ dstat -t --debug
-Module dstat_time
+[dag@rhun dag]$ dool -t --debug
+Module dool_time
 -----time-----
   date/time   
 19-08 20:34:21  5.90ms
@@ -815,10 +815,10 @@ Module dstat_time
 Compare this with other plugins to see what the cost is of an individual
 plugin.
 
-.The cost of running the +dstat_cpu+ plugin
+.The cost of running the +dool_cpu+ plugin
 ----
-[dag@rhun dstat]$ dstat -c --debug
-Module dstat_cpu requires ['/proc/stat']
+[dag@rhun dool]$ dool -c --debug
+Module dool_cpu requires ['/proc/stat']
 ----total-cpu-usage----
 usr sys idl wai hiq siq
  15   3  77   4   0   1 11.07ms
@@ -829,12 +829,12 @@ usr sys idl wai hiq siq
 
 As you can see, getting the CPU counters and calculating the CPU usage takes
 up 0.5 milliseconds on this particular system. But if we look at the usage of
-the +dstat_top_cpu+ plugin:
+the +dool_top_cpu+ plugin:
 
-.The cost of running the +dstat_top_cpu+ plugin
+.The cost of running the +dool_top_cpu+ plugin
 ----
-[dag@rhun dstat]$ dstat --top-cpu --debug
-Module dstat_top_cpu
+[dag@rhun dool]$ dool --top-cpu --debug
+Module dool_top_cpu
 -most-expensive-
   cpu process   
 Xorg           2 43.82ms
@@ -847,40 +847,40 @@ we see that processing the _/proc/pid_ files causes the top-cpu plugin to use
 an additional 33ms.
 
 WARNING: These values show the time it takes to process the plugins and does
-not indicate the amount of CPU usage Dstat consumes. This obviously means that
+not indicate the amount of CPU usage Dool consumes. This obviously means that
 the process time of plugins depends on how much the system is being stressed
 as well as on what the plugin exactly is doing.
 
 Plugins that communicate with other processes or those that process lots of
 information (eg. communicating with the mysql client, or processing the mail
 queue) may not actually use any local resources, but the latency causes
-Dstat to slow down processing other counters.
+Dool to slow down processing other counters.
 
 // FIXME: Write about profiling infrastructure
 
 
 == Future development
-The Dstat release contains a _TODO_ file highlighting all the items and
+The Dool release contains a _TODO_ file highlighting all the items and
 ideas that have been played with. Here is a list of the most important ones:
 
  - Output
-   * Changes in how Dstat colours digits within a value (the 6 in 6134B)
+   * Changes in how Dool colours digits within a value (the 6 in 6134B)
  - Exporting information
-   * Connecting Dstat with rrdtool
+   * Connecting Dool with rrdtool
    * Exporting to syslog or remote syslog (a way to transport counters ?)
  - Plugins
    * Be smart when plugins are loaded more than once (some plugins could
      benefit)
    * Add more plugins
- - Redesign Dstat
+ - Redesign Dool
    * Create an object-model and namespace for plugins and counters so that
-     other tools can be based on Dstat
+     other tools can be based on Dool
 
 == Links
 
- - http://dag.wieers.com/home-made/dstat/[Dstat homepage]
- - http://svn.rpmforge.net/svn/trunk/tools/dstat/[Dstat subversion]
- - http://lists.rpmforge.net/mailman/listinfo/tools[Dstat mailinglist]
+ - http://dag.wieers.com/home-made/dool/[Dool homepage]
+ - http://svn.rpmforge.net/svn/trunk/tools/dool/[Dool subversion]
+ - http://lists.rpmforge.net/mailman/listinfo/tools[Dool mailinglist]
 
 
 // vim: set syntax=asciidoc:

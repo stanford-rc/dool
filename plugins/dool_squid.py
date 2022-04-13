@@ -1,15 +1,15 @@
 ### Authority: Jason Friedland <thesuperjason@gmail.com>
 
 # This plugin has been tested with:
-# - Dstat 0.6.7
+# - Dool 0.6.7
 # - CentOS release 5.4 (Final)
 # - Python 2.4.3
 # - Squid 2.6 and 2.7
  
 global squidclient_options
-squidclient_options = os.getenv('DSTAT_SQUID_OPTS') # -p 8080
+squidclient_options = os.getenv('DOOL_SQUID_OPTS') # -p 8080
  
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     '''
     Provides various Squid statistics.
     '''

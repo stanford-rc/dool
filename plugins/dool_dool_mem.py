@@ -1,16 +1,16 @@
 ### Author: Dag Wieers <dag$wieers,com>
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
-    Provide memory information related to the dstat process.
+    Provide memory information related to the dool process.
 
     The various values provide information about the memory usage of the
-    dstat process. This plugin gives you the possibility to follow memory
-    usage changes of dstat over time. It may help to vizualise the
-    performance of Dstat and its selection of plugins.
+    dool process. This plugin gives you the possibility to follow memory
+    usage changes of dool over time. It may help to vizualise the
+    performance of Dool and its selection of plugins.
     """
     def __init__(self):
-        self.name = 'dstat memory usage'
+        self.name = 'dool memory usage'
         self.vars = ('virtual', 'resident', 'shared', 'data')
         self.type = 'd'
         self.open('/proc/%s/statm' % ownpid)

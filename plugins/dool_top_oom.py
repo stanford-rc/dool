@@ -1,12 +1,12 @@
 ### Author: Dag Wieers <dag@wieers.com>
 
-### Dstat most expensive process plugin
+### Dool most expensive process plugin
 ### Displays the name of the most expensive process
 
 ### More information:
 ###    http://lwn.net/Articles/317814/
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     def __init__(self):
         self.name = 'out of memory'
         self.vars = ('kill score',)

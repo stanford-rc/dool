@@ -5,16 +5,16 @@ global BIN_JCMD
 BIN_JCMD = '/usr/bin/jcmd'
 
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
     This plugin gathers jvm stats via jcmd.
 
     Usage:
-       JVM_PID=15123 dstat --jvm-full 
+       JVM_PID=15123 dool --jvm-full 
 
     Minimize the impacts of jcmd and consider using:
 
-        dstat --noupdate
+        dool --noupdate
 
     For full informations on jcmd see:
 

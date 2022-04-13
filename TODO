@@ -11,7 +11,7 @@ If you have other nice ideas that you think would be an improvement, please
 contact me as well. :) Send an email to: Dag Wieers <dag@wieers.com>
 
 ### Usability
-+ Add --config option and use /etc/dstat.conf and ~/.dstat to influence output (see example dstat.conf)
++ Add --config option and use /etc/dool.conf and ~/.dool to influence output (see example dool.conf)
 + Allow to force to given magnitude (--unit=kilo)
 + Look at possibilities to show deviation (on second line ? not practical)
 + Check for dark/light background color and change colors accordingly (option --bw/--blackonwhite)
@@ -27,7 +27,7 @@ contact me as well. :) Send an email to: Dag Wieers <dag@wieers.com>
 + Create document on general system performance tuning
   (explaining the different values in /proc, especially the concerning ones)
 + Create document on general system performance tools
-  (explaining the different uses of tools like dstat, iostat, pmap, strace, tcpdump)
+  (explaining the different uses of tools like dool, iostat, pmap, strace, tcpdump)
 + Comply to PEP8: http://www.python.org/dev/peps/pep-0008/
 
 ### Export/Graph
@@ -67,7 +67,7 @@ contact me as well. :) Send an email to: Dag Wieers <dag@wieers.com>
 
 ### Plugin issues
 + plugins that use /proc/pid/stats are reasonably slow (implement in C might help)
-+ disk plugin: /proc/partitions can have negative numbers, seen on systems with long uptime. dstat handles this except for calculating the very first stat, no work-around possible?
++ disk plugin: /proc/partitions can have negative numbers, seen on systems with long uptime. dool handles this except for calculating the very first stat, no work-around possible?
 + proc plugin: (run and blk) does not work on 2.4.24+ (to be confirmed ?)
 + tcp plugin: is very slow and generates lots of softirqs (on busy systems), to be confirmed
 
@@ -86,5 +86,5 @@ contact me as well. :) Send an email to: Dag Wieers <dag@wieers.com>
     blk_read/sec, blk_wrtn/sec (kB/sec)
 
 + Design proper object model and namespace for _all_ possible stats
-+ Create a seperate curses-based tool, much like nmon (dstat stays line-based)
++ Create a seperate curses-based tool, much like nmon (dool stays line-based)
 + Create client/server monitoring tool

@@ -1,10 +1,10 @@
-= Dstat performance
+= Dool performance
 
 == Introduction
-Since Dstat is written in python, it is not optimized for performance.
-But that doesn't mean that Dstat performs bad, it performs quite good
+Since Dool is written in python, it is not optimized for performance.
+But that doesn't mean that Dool performs bad, it performs quite good
 given its written in python and a lot of dedication went into profiling
-and optimizing Dstat and Dstat plugins.
+and optimizing Dool and Dool plugins.
 
 But when doing performance analysis, it is always important to verify
 that the monitoring tool is not interfering with the performance numbers.
@@ -12,15 +12,15 @@ that the monitoring tool is not interfering with the performance numbers.
 
 == Compare with baseline
 Depending on the plugins being used and the load on the server itself
-the impact Dstat has on the system you are monitoring might be
+the impact Dool has on the system you are monitoring might be
 considerable. A lot of plugins are pretty fast (less than 0.1ms on
 an modest 1.2Ghz laptop), but some plugins may use up to 3ms or even
 up to 2% of your CPU. (eg. each top-plugin scans the process-list)
 
 Before performing any tests please verify for yourself what impact
-Dstat has on your test results and keep that in mind when analysing
-the results afterwards. Especially if you suspect Dstat to be
-influencing your results, do a baseline with and without the Dstat
+Dool has on your test results and keep that in mind when analysing
+the results afterwards. Especially if you suspect Dool to be
+influencing your results, do a baseline with and without the Dool
 commandline.
 
 == Selection of plugins
@@ -32,7 +32,7 @@ Newer python versions are also faster than older ones, and hardware is
 only becoming faster at a pace that these considerations may not hold
 anylonger.
 
-== Debugging and profiling Dstat
+== Debugging and profiling Dool
 If you need feedback about plugin performance, use the --debug option
 to profile different plugins. If you use -t together with --debug, you
 can see the time deviation on your system in relation to load/plugins.
@@ -41,23 +41,23 @@ If you want to profile certain plugins, you can use the --profile option
 which provides you with detailed information of the function calls that
 are the most expensive.
 
-You can also run the dstat plugin (--dstat) to look what overhead (cputime)
-and response (latency) Dstat has during runtime, which can be very useful
+You can also run the dool plugin (--dool) to look what overhead (cputime)
+and response (latency) Dool has during runtime, which can be very useful
 to compare with your baseline and the system in idle state.
 
 One common way to profile a single plugin is to use the following
 commandline:
 
-    dstat -t --dstat --debug --profile
-    dstat -t --dstat --top-cpu --debug --profile
+    dool -t --dool --debug --profile
+    dool -t --dool --top-cpu --debug --profile
 
 The default profiling infrastructure is quite expensive, so it is important
 that you first make a baseline including the profiling itself, then
 compare it against the same commandline including the plugin you want to
 profile.
 
-== Improving Dstat's footprint even more
-Another way to win a few CPU cycles is to pre-compile the Dstat plugins
+== Improving Dool's footprint even more
+Another way to win a few CPU cycles is to pre-compile the Dool plugins
 by running the compileall.py script that comes with python on your
 plugins directory. It can save about 10% in execution time.
 

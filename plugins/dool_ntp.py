@@ -9,11 +9,11 @@ import struct
 ### FIXME: Implement millisecond granularity as well
 ### FIXME: Interrupts socket if data is overdue (more than 250ms ?)
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
     Time from an NTP server.
 
-    BEWARE: this dstat plugin typically takes a lot longer to run than
+    BEWARE: this dool plugin typically takes a lot longer to run than
     system plugins and for that reason it is important to use an NTP server
     located nearby as well as make sure that it does not impact your other
     counters too much.
@@ -23,8 +23,8 @@ class dstat_plugin(dstat):
         self.name = 'ntp'
         self.nick = ('date/time',)
         self.vars = ('time',)
-        self.timefmt = os.getenv('DSTAT_TIMEFMT') or '%d-%m %H:%M:%S'
-        self.ntpserver = os.getenv('DSTAT_NTPSERVER') or '0.fedora.pool.ntp.org'
+        self.timefmt = os.getenv('DOOL_TIMEFMT') or '%d-%m %H:%M:%S'
+        self.ntpserver = os.getenv('DOOL_NTPSERVER') or '0.fedora.pool.ntp.org'
         self.type = 's'
         self.width = len(time.strftime(self.timefmt, time.localtime()))
         self.scale = 0

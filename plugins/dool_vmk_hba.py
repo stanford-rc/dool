@@ -1,4 +1,4 @@
-### Author: Bert de Bruijn <bert+dstat$debruijn,be>
+### Author: Bert de Bruijn <bert+dool$debruijn,be>
 
 ### VMware ESX kernel vmhba stats
 ### Displays kernel vmhba statistics on VMware ESX servers
@@ -6,13 +6,13 @@
 # NOTE TO USERS: command-line plugin configuration is not yet possible, so I've
 # "borrowed" the -D argument. 
 # EXAMPLES:
-# # dstat --vmkhba -D vmhba1,vmhba2,total
-# # dstat --vmkhba -D vmhba0
+# # dool --vmkhba -D vmhba1,vmhba2,total
+# # dool --vmkhba -D vmhba0
 # You can even combine the Linux and VMkernel diskstats (but the "total" argument
 # will be used by both).
-# # dstat --vmkhba -d -D sda,vmhba1
+# # dool --vmkhba -d -D sda,vmhba1
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     def __init__(self):
         self.name = 'vmkhba'
         self.nick = ('read', 'writ')

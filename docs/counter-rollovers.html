@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.9" />
-<title>All you ever wanted to know about counter-rollovers in Dstat</title>
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>All you ever wanted to know about counter-rollovers in Dool</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -94,9 +94,7 @@ ul > li > * { color: black; }
   padding: 0;
   margin: 0;
 }
-pre {
-  white-space: pre-wrap;
-}
+
 
 #author {
   color: #527bbd;
@@ -225,7 +223,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; vertical-align: text-bottom; }
+span.image img { border-style: none; }
 a.image:visited { color: white; }
 
 dl {
@@ -733,13 +731,13 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>All you ever wanted to know about counter-rollovers in Dstat</h1>
+<h1>All you ever wanted to know about counter-rollovers in Dool</h1>
 </div>
 <div id="content">
 <div class="sect1">
 <h2 id="_what_you_need_to_know_about_counter_rollovers">What you need to know about counter rollovers</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Unfortunately, Dstat is susceptible for counter rollovers, which may give
+<div class="paragraph"><p>Unfortunately, Dool is susceptible for counter rollovers, which may give
 you bogus performance output. Linux currently implements counters as 32bit
 values (not sure on 64bit platforms). This means a counter can go up to
 2^32 (= 4294967296 = 4G) values.</p></div>
@@ -751,10 +749,10 @@ interfaces, this happens after 1.6 seconds.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_how_does_this_impact_dstat">How does this impact Dstat ?</h2>
+<h2 id="_how_does_this_impact_dool">How does this impact Dool ?</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Currently Dstat has a problem if you specify delays that are too big. I.e.
-using 60 or 120 seconds delay in Dstat will make Dstat check these counters
+<div class="paragraph"><p>Currently Dool has a problem if you specify delays that are too big. I.e.
+using 60 or 120 seconds delay in Dool will make Dool check these counters
 only once per minute or every two minutes.</p></div>
 <div class="paragraph"><p>In case a counter rolls over, it may be lower than the previous value, or
 worse, the value may actually be higher. In the first case we compensate
@@ -769,7 +767,7 @@ This is very problematic, and it&#8217;s important you are aware of this.</p></d
 <div class="sect1">
 <h2 id="_what_are_the_solutions">What are the solutions ?</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>The only fix for Dstat is to check more often than the specified delay.
+<div class="paragraph"><p>The only fix for Dool is to check more often than the specified delay.
 Unfortunately, this requires a re-design (or an ugly hack). But if rollovers
 happen more than once (or values are larger than the max value) we cannot fix
 this.</p></div>
@@ -781,9 +779,9 @@ using bytes to kbytes. None of this is sure. (add pointers to threads)</p></div>
 <h2 id="_what_can_i_do">What can I do ?</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Since this is Open Source, you are free to fix this and send me the fix. Or
-help with a redesign of Dstat to overcome this problem. Also look at the
-TODO file to see what other changes are expected in a redesign of Dstat.</p></div>
-<div class="paragraph"><p>Since I have a lot of other responsibilities and am currently not using Dstat
+help with a redesign of Dool to overcome this problem. Also look at the
+TODO file to see what other changes are expected in a redesign of Dool.</p></div>
+<div class="paragraph"><p>Since I have a lot of other responsibilities and am currently not using Dool
 for something where this problem matters much, I will have no time to look at
 it closely (unless the fix or the redesign is made fairly simple). It all
 depends on how quick I think I can fix/redesign it and how much time I have.</p></div>
@@ -802,7 +800,7 @@ depends on how quick I think I can fix/redesign it and how much time I have.</p>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-04 14:07:27 CEST
+Last updated 2022-04-13 14:53:29 PDT
 </div>
 </div>
 </body>

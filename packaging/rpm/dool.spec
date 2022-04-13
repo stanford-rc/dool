@@ -4,7 +4,7 @@
 
 Summary: Pluggable real-time performance monitoring tool
 Name: dool
-Version: 0.9.9
+Version: 1.0.1
 Release: 1
 License: GPL
 Group: System Environment/Base
@@ -54,6 +54,9 @@ never expected.
 %{_datadir}/dool/
 
 %changelog
+* Wed Apr 13 2022 Kilian Cavalotti <kilian@stanford.edu> - 1.0.1-1
+- Updated to release 1.0.1.
+
 * Fri Aug 23 2019 Scott Baker <scott@perturb.org> - 0.9.9-1
 - Updated to release 0.9.9.
 

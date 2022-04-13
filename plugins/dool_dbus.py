@@ -1,6 +1,6 @@
 ### Author: Dag Wieers <dag$wieers,com>
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
     Number of active dbus sessions.
     """
@@ -13,7 +13,7 @@ class dstat_plugin(dstat):
         self.scale = 100
 
     def check(self):
-#       dstat.info(1, 'The dbus module is an EXPERIMENTAL module.')
+#       dool.info(1, 'The dbus module is an EXPERIMENTAL module.')
         try:
             global dbus
             import dbus

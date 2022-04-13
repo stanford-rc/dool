@@ -1,17 +1,17 @@
-name: dstat
+name: dool
 version: 0.7.3
 summary: Versatile resource statistic tool 
-description: dstat is a versatile replacement for vmstat, iostat, and ifstat.
+description: dool is a versatile replacement for vmstat, iostat, and ifstat.
 confinement: strict
 
 apps:
-  dstat:
-    command: usr/bin/dstat
+  dool:
+    command: usr/bin/dool
     plugs: [home, system-observe]
 parts:
-  dstat:
+  dool:
     plugin: make 
-    source: https://github.com/dagwieers/dstat/archive/0.7.3.tar.gz 
+    source: https://github.com/dagwieers/dool/archive/0.7.3.tar.gz 
     build-packages: [gcc, libc6-dev]
     stage-packages: [python2.7]
 
@@ -26,4 +26,4 @@ parts:
       - -lib/x86_64-linux-gnu
       - usr/bin/python2
       - usr/bin/python2.7
-      - usr/bin/dstat
+      - usr/bin/dool

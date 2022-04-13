@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.9" />
-<title>Configuring screen to display multiple dstat for different systems</title>
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>Configuring screen to display multiple dool for different systems</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -94,9 +94,7 @@ ul > li > * { color: black; }
   padding: 0;
   margin: 0;
 }
-pre {
-  white-space: pre-wrap;
-}
+
 
 #author {
   color: #527bbd;
@@ -225,7 +223,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; vertical-align: text-bottom; }
+span.image img { border-style: none; }
 a.image:visited { color: white; }
 
 dl {
@@ -733,7 +731,7 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Configuring screen to display multiple dstat for different systems</h1>
+<h1>Configuring screen to display multiple dool for different systems</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -749,15 +747,15 @@ split
 split
 split
 split
-screen -t node01 1 ssh -t 172.17.0.211 'dstat -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'
+screen -t node01 1 ssh -t 172.17.0.211 'dool -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'
 focus down
-screen -t node02 2 ssh -t 172.17.0.212 'dstat -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'
+screen -t node02 2 ssh -t 172.17.0.212 'dool -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'
 focus down
-screen -t node03 3 ssh -t 172.17.0.213 'dstat -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'
+screen -t node03 3 ssh -t 172.17.0.213 'dool -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'
 focus down
-screen -t node04 4 ssh -t 172.17.0.214 'dstat -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'
+screen -t node04 4 ssh -t 172.17.0.214 'dool -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'
 focus down
-screen -t node05 5 ssh -t 172.17.0.215 'dstat -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'</code></pre>
+screen -t node05 5 ssh -t 172.17.0.215 'dool -cdnyp --tcp --udp -l -D lores,hires -N bond0,eth0,eth2,eth3 10'</code></pre>
 </div></div>
 <div class="paragraph"><p>Then set the environment variable to tell screen to use this config-file
 for the next screen.</p></div>
@@ -765,13 +763,13 @@ for the next screen.</p></div>
 <div class="content">
 <pre><code>SCREENRC='screenrc-5nodes' screen</code></pre>
 </div></div>
-<div class="paragraph"><p>If you want to get out of this screen and end all dstats, the easiest way
-is to kill first all regions and then end each dstat. You can do this by:</p></div>
+<div class="paragraph"><p>If you want to get out of this screen and end all dools, the easiest way
+is to kill first all regions and then end each dool. You can do this by:</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><code>ctrl-a X</code></pre>
 </div></div>
-<div class="paragraph"><p>Do that 5 times, and then quit each dstat by pressing:</p></div>
+<div class="paragraph"><p>Do that 5 times, and then quit each dool by pressing:</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><code>ctrl-c</code></pre>
@@ -792,7 +790,7 @@ is to kill first all regions and then end each dstat. You can do this by:</p></d
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-04 14:07:27 CEST
+Last updated 2022-04-13 15:25:27 PDT
 </div>
 </div>
 </body>

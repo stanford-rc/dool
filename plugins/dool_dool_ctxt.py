@@ -1,12 +1,12 @@
 ### Author: Dag Wieers <dag$wieers,com>
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
-    Provide Dstat's number of voluntary and involuntary context switches.
+    Provide Dool's number of voluntary and involuntary context switches.
 
     This plugin provides a unique view of the number of voluntary and
-    involuntary context switches of the Dstat process itself. It may help
-    to vizualise the performance of Dstat and its selection of plugins.
+    involuntary context switches of the Dool process itself. It may help
+    to vizualise the performance of Dool and its selection of plugins.
     """
     def __init__(self):
         self.name = 'contxt sw'

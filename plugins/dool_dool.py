@@ -1,16 +1,16 @@
 ### Author: Dag Wieers <dag$wieers,com>
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
-    Provide more information related to the dstat process.
+    Provide more information related to the dool process.
 
-    The dstat cputime is the total cputime dstat requires per second. On a
+    The dool cputime is the total cputime dool requires per second. On a
     system with one cpu and one core, the total cputime is 1000ms. On a system
     with 2 cores the total is 2000ms. It may help to vizualise the performance
-    of Dstat and its selection of plugins.
+    of Dool and its selection of plugins.
     """
     def __init__(self):
-        self.name = 'dstat'
+        self.name = 'dool'
         self.vars = ('cputime', 'latency')
         self.type = 'd'
         self.width = 5

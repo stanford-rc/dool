@@ -1,9 +1,9 @@
-### Dstat all I/O process plugin
+### Dool all I/O process plugin
 ### Displays all processes' I/O read/write stats and CPU usage
 ###
 ### Authority: Guillermo Cantu Luna
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     def __init__(self):
         self.name = 'most expensive block i/o process'
         self.vars = ('process              pid  read write cpu',)

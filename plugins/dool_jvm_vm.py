@@ -6,7 +6,7 @@
 #
 
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
 
     def __init__(self):
         self.name = 'jvm mem ops '
@@ -40,10 +40,10 @@ class dstat_plugin(dstat):
             lines = self._cmd_splitlines(
                 '/usr/bin/jstat -gc %s' % self.jvm_pid)
             headers = next(lines)
-            DStatParser = namedtuple('DStatParser', headers)
+            DoolParser = namedtuple('DoolParser', headers)
             line = next(lines)
             if line:
-                stats = DStatParser(*[self._to_float(x) for x in line])
+                stats = DoolParser(*[self._to_float(x) for x in line])
                 # print(stats)
                 self.set2['cls'] = 0
                 self.set2['fgc'] = int(stats.FGC)

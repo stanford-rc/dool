@@ -1,4 +1,4 @@
-### Author: Bert de Bruijn <bert+dstat$debruijn,be>
+### Author: Bert de Bruijn <bert+dool$debruijn,be>
 
 ### VMware ESX kernel vmknic stats
 ### Displays VMkernel port statistics on VMware ESX servers
@@ -6,12 +6,12 @@
 # NOTE TO USERS: command-line plugin configuration is not yet possible, so I've
 # "borrowed" the -N argument.
 # EXAMPLES:
-# # dstat --vmknic -N vmk1
+# # dool --vmknic -N vmk1
 # You can even combine the Linux and VMkernel network stats (just don't just "total").
-# # dstat --vmknic -n -N vmk0,vswif0
+# # dool --vmknic -n -N vmk0,vswif0
 # NB Data comes from /proc/vmware/net/tcpip/ifconfig
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     def __init__(self):
         self.name = 'vmknic'
         self.nick = ('recv', 'send')

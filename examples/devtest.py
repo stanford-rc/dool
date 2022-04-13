@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 import sys
-sys.path.insert(0, '/usr/share/dstat/')
-import dstat, time
+sys.path.insert(0, '/usr/share/dool/')
+import dool, time
 
 devices = ( 
     (  1,   0, 'ram0'),
@@ -29,4 +29,4 @@ devices = (
 )
 
 for maj, min, device in devices:
-    print device, '->', dstat.dev(maj, min)
+    print device, '->', dool.dev(maj, min)

@@ -5,11 +5,11 @@
 ### This is a quick example showing how to implement your own *stat utility
 ### If you're interested in such functionality, contact me at dag@wieers.com
 import sys
-sys.path.insert(0, '/usr/share/dstat/')
-import dstat, time
+sys.path.insert(0, '/usr/share/dool/')
+import dool, time
 
 ### Set default theme
-dstat.theme = dstat.set_theme()
+dool.theme = dool.set_theme()
 
 ### Allow arguments
 try: delay = float(sys.argv[1])
@@ -19,9 +19,9 @@ except: count = 10
 
 ### Load stats
 stats = []
-dstat.starttime = time.time()
-dstat.tick = dstat.ticks()
-for o in (dstat.dstat_epoch(), dstat.dstat_cpu(), dstat.dstat_mem(), dstat.dstat_load(), dstat.dstat_disk(), dstat.dstat_sys()):
+dool.starttime = time.time()
+dool.tick = dool.ticks()
+for o in (dool.dool_epoch(), dool.dool_cpu(), dool.dool_mem(), dool.dool_load(), dool.dool_disk(), dool.dool_sys()):
     try: o.check()
     except Exception, e: print e
     else: stats.append(o)
@@ -37,12 +37,12 @@ for o in stats:
 print '\n' + title + '\n' + subtitle
 
 ### Print stats
-for dstat.update in range(count):
+for dool.update in range(count):
     line = ''
     for o in stats:
         o.extract()
         line = line + '  ' + o.show()
-    print line + dstat.ansi['reset']
-    if dstat.update != count-1: time.sleep(delay)
-    dstat.tick = 1
-print dstat.ansi['reset']
+    print line + dool.ansi['reset']
+    if dool.update != count-1: time.sleep(delay)
+    dool.tick = 1
+print dool.ansi['reset']

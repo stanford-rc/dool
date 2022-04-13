@@ -1,8 +1,8 @@
 ### Author: Dag Wieers <dag$wieers,com>
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
-    Example "Hello world!" output plugin for aspiring Dstat developers.
+    Example "Hello world!" output plugin for aspiring Dool developers.
     """
 
     def __init__(self):

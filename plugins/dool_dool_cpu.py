@@ -1,18 +1,18 @@
 ### Author: Dag Wieers <dag$wieers,com>
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
-    Provide CPU information related to the dstat process.
+    Provide CPU information related to the dool process.
 
-    This plugin shows the CPU utilization for the dstat process itself,
+    This plugin shows the CPU utilization for the dool process itself,
     including the user-space and system-space (kernel) utilization and
     a total of both. On a system with one cpu and one core, the total
     cputime is 1000ms. On a system with 2 cores the total is 2000ms.
-    It may help to vizualise the performance of Dstat and its selection
+    It may help to vizualise the performance of Dool and its selection
     of plugins.
     """
     def __init__(self):
-        self.name = 'dstat cpu'
+        self.name = 'dool cpu'
         self.vars = ('user', 'system', 'total')
         self.nick = ('usr', 'sys', 'tot')
         self.type = 'p'

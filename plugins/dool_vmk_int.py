@@ -1,4 +1,4 @@
-### Author: Bert de Bruijn <bert+dstat$debruijn,be>
+### Author: Bert de Bruijn <bert+dool$debruijn,be>
 
 ### VMware ESX kernel interrupt stats
 ### Displays kernel interrupt statistics on VMware ESX servers
@@ -6,12 +6,12 @@
 # NOTE TO USERS: command-line plugin configuration is not yet possible, so I've
 # "borrowed" the -I argument. 
 # EXAMPLES:
-# # dstat --vmkint -I 0x46,0x5a
+# # dool --vmkint -I 0x46,0x5a
 # You can even combine the Linux and VMkernel interrupt stats
-# # dstat --vmkint -i -I 14,0x5a
+# # dool --vmkint -i -I 14,0x5a
 # Look at /proc/vmware/interrupts to see which interrupt is linked to which function
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     def __init__(self):
         self.name = 'vmkint'
         self.type = 'd'

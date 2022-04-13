@@ -1,6 +1,6 @@
 ### Author: Dag Wieers <dag$wieers,com>
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     """
     Percentage of bandwidth utilization for block devices.
 
@@ -43,12 +43,12 @@ class dstat_plugin(dstat):
                     if target[0] != '/':
                         target = os.path.join(os.path.dirname(disk), target)
                         target = os.path.normpath(target)
-                    print('dstat: symlink %s -> %s' % (disk, target))
+                    print('dool: symlink %s -> %s' % (disk, target))
                     disk = target
                 # trim leading /dev/
                 return disk[5:]
             else:
-                print('dstat: %s does not exist' % disk)
+                print('dool: %s does not exist' % disk)
         else:
             return disk
 

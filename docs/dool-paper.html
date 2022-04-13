@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.9" />
-<title>Dstat: pluggable real-time monitoring</title>
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>Dool: pluggable real-time monitoring</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -94,9 +94,7 @@ ul > li > * { color: black; }
   padding: 0;
   margin: 0;
 }
-pre {
-  white-space: pre-wrap;
-}
+
 
 #author {
   color: #527bbd;
@@ -225,7 +223,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; vertical-align: text-bottom; }
+span.image img { border-style: none; }
 a.image:visited { color: white; }
 
 dl {
@@ -733,7 +731,7 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Dstat: pluggable real-time monitoring</h1>
+<h1>Dool: pluggable real-time monitoring</h1>
 <span id="author">Dag Wieers</span><br />
 <span id="email"><code>&lt;<a href="mailto:dag@wieers.com">dag@wieers.com</a>&gt;</code></span><br />
 <span id="revdate">$Id$</span>
@@ -741,7 +739,7 @@ asciidoc.install();
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p><em>This Dstat paper was originally written for LinuxConf Europe that was
+<div class="paragraph"><p><em>This Dool paper was originally written for LinuxConf Europe that was
 held together with the Linux Kernel summit at the University in Cambridge,
 UK in August 2007.</em></p></div>
 </div>
@@ -751,7 +749,7 @@ UK in August 2007.</em></p></div>
 <div class="sectionbody">
 <div class="paragraph"><p>Many tools exist to monitor hardware resources and software behaviour, but few
 tools exist that allow you to easily monitor any conceivable counter.</p></div>
-<div class="paragraph"><p>Dstat was designed with the idea that it should be simple to plug in a piece
+<div class="paragraph"><p>Dool was designed with the idea that it should be simple to plug in a piece
 of code that extracts one or more counters, and make it visible in a way that
 visually pleases the eye and helps you extract information in real-time.</p></div>
 <div class="paragraph"><p>By being able to select those counters that you want (and likely those
@@ -760,7 +758,7 @@ correlate raw numbers and see a pattern that may otherwise not be visible.</p></
 </div>
 </div>
 <div class="sect1">
-<h2 id="_a_case_for_dstat">A case for Dstat</h2>
+<h2 id="_a_case_for_dool">A case for Dool</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>A few years ago I was involved in a project that was testing a storage cluster
 with a SAN back-end using GPFS and Samba for a broadcasting company. The
@@ -783,7 +781,7 @@ numbers after the tests were complete and not during the tests.</p></div>
 and using the normal command line tools like vmstat, iostat or ifstat (which
 only showed us a small part of what was happening) was problematic as each
 needed a different terminal. Besides, not all information was interesting.</p></div>
-<div class="paragraph"><p>Eventually Dstat was born, to make a dull task more enjoyable.</p></div>
+<div class="paragraph"><p>Eventually Dool was born, to make a dull task more enjoyable.</p></div>
 <div class="paragraph"><p>After the project was finished I was able to correlate system resources with
 network throughput, TCP information, Samba sessions, GPFS throughput,
 accumulated block device throughput, HBA throughput, all within a single
@@ -791,9 +789,9 @@ interval on one screen for the complete cluster.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dstat_characteristics">Dstat characteristics</h2>
+<h2 id="_dool_characteristics">Dool characteristics</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>There are many ideas incorporated into Dstat by design, and this section
+<div class="paragraph"><p>There are many ideas incorporated into Dool by design, and this section
 serves to list all of them. Not all of them may appeal to the task you&#8217;re
 doing, but the combination may make it an appealing proposition nevertheless.</p></div>
 <div class="sect2">
@@ -839,7 +837,7 @@ over some pre-defined limit.</td>
 <div class="sect2">
 <h3 id="_intermediate_updates">Intermediate updates</h3>
 <div class="paragraph"><p>During tests, when you choose to see average values over a given time, it can
-be useful to see how the averages evolve. Dstat, by default, displays
+be useful to see how the averages evolve. Dool, by default, displays
 intermediate updates. This means that if you select to see 10 second averages,
 after each second you see the accumulated average over the timespan. <strong>This
 means that after 4 seconds with intermediate updates, you see an average
@@ -856,7 +854,7 @@ the more likely that it nears its final average over that period.</td>
 </div>
 <div class="sect2">
 <h3 id="_adding_custom_counters">Adding custom counters</h3>
-<div class="paragraph"><p>Dstat was specifically designed to enable anyone to add their own counters in a
+<div class="paragraph"><p>Dool was specifically designed to enable anyone to add their own counters in a
 matter of minutes. The plugin-based system takes care of displaying, colouring
 and adding units to the counters. As a plugin-writer, you only have to focus
 on extracting the counters from the kernel (procfs or sysfs), logfiles or
@@ -872,7 +870,7 @@ and see patterns. Less is more.</p></div>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">In fact, Dstat currently does not allow you to select just counters, it
+<td class="content">In fact, Dool currently does not allow you to select just counters, it
 only allows you to select plugins. However, since you can modify or fork a
 plugin, you still have the ability to select just those counters you prefer.</td>
 </tr></table>
@@ -882,9 +880,9 @@ plugin, you still have the ability to select just those counters you prefer.</td
 <h3 id="_exporting_to_csv">Exporting to CSV</h3>
 <div class="paragraph"><p>Having information on screen is one thing, you most likely need some hard
 evidence later to make your case. (Why else do all the work?)</p></div>
-<div class="paragraph"><p>Dstat allows to write out all counters in the greatest detail possible to CSV.
+<div class="paragraph"><p>Dool allows to write out all counters in the greatest detail possible to CSV.
 By default it also adds the command-line used for generating the output, as
-well as a date and time stamp. Since Dstat in the first place is meant for
+well as a date and time stamp. Since Dool in the first place is meant for
 human-readable real-time statistics, it will by default also display the
 counters to screen (unless you <em>/dev/null</em> it).</p></div>
 <div class="admonitionblock">
@@ -892,7 +890,7 @@ counters to screen (unless you <em>/dev/null</em> it).</p></div>
 <td class="icon">
 <div class="title">Tip</div>
 </td>
-<td class="content">Dstat appends to the output file so that you can add tests-results of
+<td class="content">Dool appends to the output file so that you can add tests-results of
 different tests to a single file. However, make sure that you tag each test
 properly (eg. by using distinct filenames for each different test).</td>
 </tr></table>
@@ -902,31 +900,31 @@ properly (eg. by using distinct filenames for each different test).</td>
 <h3 id="_time_plugin_included">Time-plugin included</h3>
 <div class="paragraph"><p>It may seem a small thing, but having exact time (and date) information for
 your counters allows for a completely different usage as well. By adding
-simple date and time information, Dstat can be used as a background process in
+simple date and time information, Dool can be used as a background process in
 a screen to monitor the behaviour of your system during the night.</p></div>
 <div class="paragraph"><p>This proves to be very valuable for example, to find offending processes during
 nightly tasks or to pinpoint their behaviour to certain events that you cannot
 monitor during working hours.</p></div>
-<div class="paragraph"><p>It is also important when you have multiple Dstats running (eg. for nodes in a
+<div class="paragraph"><p>It is also important when you have multiple Dools running (eg. for nodes in a
 cluster) to correlate counters between the outputs.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_terminal_capabilities">Terminal capabilities</h3>
-<div class="paragraph"><p>Dstat also takes into account the width and height of your terminal window and
+<div class="paragraph"><p>Dool also takes into account the width and height of your terminal window and
 modifies output to fit into your terminal. This, of course, has no effect on
 what ends up in the CSV output.</p></div>
-<div class="paragraph"><p>Another (debatable) useful feature is that Dstat will modify the terminal
+<div class="paragraph"><p>Another (debatable) useful feature is that Dool will modify the terminal
 title to indicate on what system it was run and what options were used.
 Especially when monitoring nodes in a cluster, this can be useful, but even in
-Gnome finding your Dstat window is handy.</p></div>
+Gnome finding your Dool window is handy.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
 <div class="title">Warning</div>
 </td>
 <td class="content">Some people however are annoyed by the fact that their distribution
-does not reset the terminal title and Dstat therefor messes it up. There is no
-way for Dstat to fix this.</td>
+does not reset the terminal title and Dool therefor messes it up. There is no
+way for Dool to fix this.</td>
 </tr></table>
 </div>
 </div>
@@ -936,15 +934,15 @@ way for Dstat to fix this.</td>
 <h2 id="_plugins_and_counters">Plugins and counters</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>When we talk about plugins, we make a distinction between those plugins that
-are included within the Dstat tool itself, and those that ship with it
+are included within the Dool tool itself, and those that ship with it
 externally.  In essence there is no real difference, as the internal plugins
 could easily have been created as an external plugin. The basic difference is
 that the internal plugins have no dependencies except on procfs.</p></div>
-<div class="paragraph"><p>Having the basic plugins as part of Dstat, makes sure that Dstat can be moved
+<div class="paragraph"><p>Having the basic plugins as part of Dool, makes sure that Dool can be moved
 as a self-contained file to other systems.</p></div>
 <div class="sect2">
 <h3 id="_internal_plugins">Internal plugins</h3>
-<div class="paragraph"><p>The plugins that have been selected to be part of the Dstat tool itself, and
+<div class="paragraph"><p>The plugins that have been selected to be part of the Dool tool itself, and
 therefor have no dependencies other than procfs, are:</p></div>
 <div class="ulist"><ul>
 <li>
@@ -1065,14 +1063,14 @@ vm: virtual memory counters
 </ul></div>
 <div class="paragraph"><p>For backward compatibility with older kernels there is a cascading system that
 selects the most appropriate internal plugin for your kernel. (eg. the
-<code>dstat_disk</code> plugin falls back to <code>dstat_disk24</code> and <code>dstat_disk24old</code>) At this
+<code>dool_disk</code> plugin falls back to <code>dool_disk24</code> and <code>dool_disk24old</code>) At this
 moment there is no such system for external plugins.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_external_plugins">External plugins</h3>
 <div class="paragraph"><p>This basic functionality is easily extended by writing your own plugins
-(subclasses of the python Dstat class) which are then inserted at runtime
-into Dstat. A set of <em>external</em> modules exist for:</p></div>
+(subclasses of the python Dool class) which are then inserted at runtime
+into Dool. A set of <em>external</em> modules exist for:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -1106,22 +1104,22 @@ disk-util: disk utilization percentage
 </li>
 <li>
 <p>
-dstat: dstat cputime consumption and latency
+dool: dool cputime consumption and latency
 </p>
 </li>
 <li>
 <p>
-dstat-cpu: dstat advanced cpu usage
+dool-cpu: dool advanced cpu usage
 </p>
 </li>
 <li>
 <p>
-dstat-ctxt: dstat context switches
+dool-ctxt: dool context switches
 </p>
 </li>
 <li>
 <p>
-dstat-mem: dstat advanced memory usage
+dool-mem: dool advanced memory usage
 </p>
 </li>
 <li>
@@ -1271,7 +1269,7 @@ sendmail: sendmail queue counters
 </li>
 <li>
 <p>
-snooze: Dstat time delay counters
+snooze: Dool time delay counters
 </p>
 </li>
 <li>
@@ -1421,7 +1419,7 @@ samba: lacking information to get counters from Samba without
 <li>
 <p>
 snmp: could be useful to relate counters from different systems
-      in a single Dstat
+      in a single Dool
 </p>
 </li>
 <li>
@@ -1431,7 +1429,7 @@ topx: display the most expensive X application(s)
 </li>
 <li>
 <p>
-systemtap: connecting Dstat to systemtap counters
+systemtap: connecting Dool to systemtap counters
 </p>
 </li>
 </ul></div>
@@ -1440,13 +1438,13 @@ systemtap: connecting Dstat to systemtap counters
 </div>
 </div>
 <div class="sect1">
-<h2 id="_using_dstat">Using Dstat</h2>
+<h2 id="_using_dool">Using Dool</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Central to the Dstat command line interface is the selection of plugins. The
-selection and order of options influence the Dstat output directly.</p></div>
+<div class="paragraph"><p>Central to the Dool command line interface is the selection of plugins. The
+selection and order of options influence the Dool output directly.</p></div>
 <div class="sect2">
 <h3 id="_enabling_plugins">Enabling plugins</h3>
-<div class="paragraph"><p>The internal plugins have short and/or long options within Dstat, eg. <code>-c</code> or
+<div class="paragraph"><p>The internal plugins have short and/or long options within Dool, eg. <code>-c</code> or
 <code>--cpu</code> will enable the cpu counters.</p></div>
 <div class="paragraph"><p>The external plugins are enable by a long option including their name,
 eg. <code>--top-cpu</code></p></div>
@@ -1454,8 +1452,8 @@ eg. <code>--top-cpu</code></p></div>
 equal.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -tcd
-dstat --time --cpu --disk</code></pre>
+<pre><code>dool -tcd
+dool --time --cpu --disk</code></pre>
 </div></div>
 </div>
 <div class="sect2">
@@ -1464,14 +1462,14 @@ dstat --time --cpu --disk</code></pre>
 therefor have an extra option to influence this decision.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -d -D sda,sdb
-dstat -n -N eth0,eth1
-dstat -c -C total,0,1</code></pre>
+<pre><code>dool -d -D sda,sdb
+dool -n -N eth0,eth1
+dool -c -C total,0,1</code></pre>
 </div></div>
 <div class="paragraph"><p>You can show both the individual values and total values as follows:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>[dag@horsea ~]$ dstat -d -D total,hda,hdc
+<pre><code>[dag@horsea ~]$ dool -d -D total,hda,hdc
 -dsk/total----dsk/hda-----dsk/hdc--
  read  writ: read  writ: read  writ
 1384k 1502k: 114k 1332k:  81k  359B
@@ -1483,19 +1481,19 @@ default, and can be overruled by <code>-C</code>, <code>-D</code>, <code>-I</cod
 </div>
 <div class="sect2">
 <h3 id="_influencing_output">Influencing output</h3>
-<div class="paragraph"><p>Dstat has a few more options to influence its output. With the <code>--nocolor</code>
+<div class="paragraph"><p>Dool has a few more options to influence its output. With the <code>--nocolor</code>
 one can disable colours. The <code>--noheaders</code> option disables repeating headers.
 The <code>--noupdate</code> option disables intermediate updates. The <code>--output</code> option
 is used for writing out to a CSV file.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_plugin_search_path">Plugin search path</h3>
-<div class="paragraph"><p>Dstat looks in the following places for plugins. This allows a user without
+<div class="paragraph"><p>Dool looks in the following places for plugins. This allows a user without
 root privileges to use some extra plugins.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-~/.dstat/
+~/.dool/
 </p>
 </li>
 <li>
@@ -1505,12 +1503,12 @@ root privileges to use some extra plugins.</p></div>
 </li>
 <li>
 <p>
-/usr/share/dstat/
+/usr/share/dool/
 </p>
 </li>
 <li>
 <p>
-/usr/local/share/dstat/
+/usr/local/share/dool/
 </p>
 </li>
 </ul></div>
@@ -1521,7 +1519,7 @@ order that the plugin search path is used.</p></div>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">Plugins are named <code>dstat_&lt;name&gt;.py</code>.</td>
+<td class="content">Plugins are named <code>dool_&lt;name&gt;.py</code>.</td>
 </tr></table>
 </div>
 </div>
@@ -1530,7 +1528,7 @@ order that the plugin search path is used.</p></div>
 <div class="sect1">
 <h2 id="_use_cases">Use-cases</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Below are some use-cases to demonstrate the usage of Dstat.</p></div>
+<div class="paragraph"><p>Below are some use-cases to demonstrate the usage of Dool.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1547,12 +1545,12 @@ colour :-)).</td>
 this probably was a <code>vmstat 1</code>, as of now you would do:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -taf</code></pre>
+<pre><code>dool -taf</code></pre>
 </div></div>
 <div class="listingblock">
 <div class="title">Sample output</div>
 <div class="content">
-<pre><code>[dag@rhun dag]$ dstat -taf
+<pre><code>[dag@rhun dag]$ dool -taf
 -----time----- -------cpu0-usage------ --dsk/sda-----dsk/sr0-- --net/eth1- ---paging-- ---system--
   date/time   |usr sys idl wai hiq siq| read  writ: read  writ| recv  send|  in   out | int   csw
 02-08 02:42:48| 10   2  85   2   0   0|  22k   23k: 1.8B    0 |   0     0 |2588B 2952B| 558   580
@@ -1575,14 +1573,14 @@ nevertheless interesting.</td>
 </div>
 <div class="sect2">
 <h3 id="_what_is_this_system_doing_now">What is this system doing now ?</h3>
-<div class="paragraph"><p>I often run both the <code>dstat_top_cpu</code> and <code>dstat_top_mem</code> programs on a system,
+<div class="paragraph"><p>I often run both the <code>dool_top_cpu</code> and <code>dool_top_mem</code> programs on a system,
 just to see what a system is doing. Having a quick look at what application
 is using the most CPU over a few minutes and to see what the general usage
 of memory is of the top application gives away a lot about a system.</p></div>
 <div class="listingblock">
 <div class="title">Sample output</div>
 <div class="content">
-<pre><code>[dag@horsea dag]$ dstat -c --top-cpu -dng --top-mem
+<pre><code>[dag@horsea dag]$ dool -c --top-cpu -dng --top-mem
 ----total-cpu-usage---- -most-expensive- -dsk/total- -net/total- ---paging-- -most-expensive-
 usr sys idl wai hiq siq|  cpu process   | read  writ| recv  send|  in   out | memory process
   9   2  80   9   0   0|kswapd         0| 123k  164k|   0     0 |9196B   18k|rsync        74M
@@ -1602,17 +1600,17 @@ worthless message, the system was swapping extensively, a process got killed.</p
 causing it and why ? As of now you can do:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>screen dstat -tcy --top-cpu 120
-screen dstat -tmgs --top-mem 120
-screen dstat -tdi --top-io 120</code></pre>
+<pre><code>screen dool -tcy --top-cpu 120
+screen dool -tmgs --top-mem 120
+screen dool -tdi --top-io 120</code></pre>
 </div></div>
 <div class="paragraph"><p>to see what process is using the most CPU, the most memory and the most I/O
 resources.</p></div>
 <div class="paragraph"><p>And hopefully one day we can do:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -tn --top-net 120
-dstat -tn --top-x 120</code></pre>
+<pre><code>dool -tn --top-net 120
+dool -tn --top-x 120</code></pre>
 </div></div>
 <div class="paragraph"><p>Leave it running during the night and in the morning you can see the light.</p></div>
 </div>
@@ -1625,15 +1623,15 @@ kernel is producing. With older kernels this is a fixed number (usually 100,
 so in that case if you want to see what is happening, you can simply do:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -ti -I0 --snooze --debug</code></pre>
+<pre><code>dool -ti -I0 --snooze --debug</code></pre>
 </div></div>
-<div class="paragraph"><p>Dstat nowadays can also detect lost ticks (when the number of ticks do not
+<div class="paragraph"><p>Dool nowadays can also detect lost ticks (when the number of ticks do not
 match the time progress. This is useful to correlate VM issues with other
 problems.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_what_device_is_slowing_down_my_system">What device is slowing down my system ?</h3>
-<div class="paragraph"><p>A nice feature of Dstat is that it can show how many interrupts each of your
+<div class="paragraph"><p>A nice feature of Dool is that it can show how many interrupts each of your
 devices is generating. The <em>cpu</em> stats already show this in percentage as
 <em>hard interrupt</em> and <em>soft interrupt</em>, and the <em>sys</em> stats shows the total
 number of interrupts, but the <em>int</em> stats go into detail. And you can specify
@@ -1643,19 +1641,19 @@ Sometimes too many interrupts can slow down a system. If you want to correlate
 bad performance with hardware interrupts, you can run a command like:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -tyif
-dstat -tyi -I 12,58,iwlagn -f 5</code></pre>
+<pre><code>dool -tyif
+dool -tyi -I 12,58,iwlagn -f 5</code></pre>
 </div></div>
 <div class="paragraph"><p>Much like <code>watch -n1 -d cat /proc/interrupts</code> on steroids.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -t -y -i -f</code></pre>
+<pre><code>dool -t -y -i -f</code></pre>
 </div></div>
 <div class="paragraph"><p>which then results in:</p></div>
 <div class="listingblock">
 <div class="title">Sample output</div>
 <div class="content">
-<pre><code>[dag@rhun ~]$ dstat -t -y -i -f 5
+<pre><code>[dag@rhun ~]$ dool -t -y -i -f 5
 -----time----- ---system-- -------------------interrupts------------------
   date/time   | int   csw |  1     9     12    14    15    58   177   185
 13-08 21:52:53| 740   923 |   1     0    18     5     1    17     4   131
@@ -1686,13 +1684,13 @@ MIS:          0</code></pre>
 <div class="paragraph"><p>Or select specific interrupts:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -t -y -i -I 12,58,185 -f 5</code></pre>
+<pre><code>dool -t -y -i -I 12,58,185 -f 5</code></pre>
 </div></div>
 <div class="paragraph"><p>Another possibility is to use the <code>--top-int</code> plugin, showing you the most
 frequent plugin on your system:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>[dag@rhun ~]# dstat -t --top-int
+<pre><code>[dag@rhun ~]# dool -t --top-int
 ----system---- ---most-frequent----
      time     |     interrupt
 11-06 08:34:53|ahci              5
@@ -1709,38 +1707,38 @@ WIFI access point. However I must say that another tool I wrote <em>Dwscan</em> 
 currently more sophisticated.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -t --wifi</code></pre>
+<pre><code>dool -t --wifi</code></pre>
 </div></div>
 </div>
 <div class="sect2">
 <h3 id="_is_my_swraid_performing_as_it_claims">Is my SWRAID performing as it claims ?</h3>
-<div class="paragraph"><p>You can monitor I/O throughput for any block device. By default dstat limits
+<div class="paragraph"><p>You can monitor I/O throughput for any block device. By default dool limits
 itself to real block devices to prevent having the same I/O to be counted more
 than once, but if you want to monitor a SWRAID device, or a multipath device,
 you can simply do that by doing:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>dstat -td -D md0,md1,sda,sdb,hda</code></pre>
+<pre><code>dool -td -D md0,md1,sda,sdb,hda</code></pre>
 </div></div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_writing_your_own_dstat_plugin">Writing your own Dstat plugin</h2>
+<h2 id="_writing_your_own_dool_plugin">Writing your own Dool plugin</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Dstat is completely written in python and this makes it extremely convenient
-to write your own plugins. The many plugins that come with Dstat are an
+<div class="paragraph"><p>Dool is completely written in python and this makes it extremely convenient
+to write your own plugins. The many plugins that come with Dool are an
 excellent source of information if you want to write your own.</p></div>
 <div class="sect2">
 <h3 id="_introducing_the_hello_world_plugin">Introducing the hello world plugin</h3>
 <div class="paragraph"><p>The following plugin does nothing more than write "Hello world!" to its
 output.</p></div>
 <div class="listingblock">
-<div class="title">The dstat_helloworld plugin in its full glory.</div>
+<div class="title">The dool_helloworld plugin in its full glory.</div>
 <div class="content">
-<pre><code>class dstat_helloworld(dstat):
+<pre><code>class dool_helloworld(dool):
     ``"
-    Example "Hello world!" output plugin for aspiring Dstat developers.
+    Example "Hello world!" output plugin for aspiring Dool developers.
     ``"
     def __init__(self):
         self.name = 'plugin title'          <b>&lt;1&gt;</b>
@@ -1798,9 +1796,9 @@ output.</p></div>
 processed. It also includes a <code>check()</code> method to properly bail out when the
 system fails to meet some plugin criteria.</p></div>
 <div class="listingblock">
-<div class="title">The dstat_postfix plugin</div>
+<div class="title">The dool_postfix plugin</div>
 <div class="content">
-<pre><code>class dstat_postfix(dstat):
+<pre><code>class dool_postfix(dool):
     def __init__(self):
         self.name = 'postfix'
         self.nick = ('inco', 'actv', 'dfrd', 'bnce', 'defr')
@@ -1840,7 +1838,7 @@ To make processing easier we have opted to use as value names (<code>self.vars</
 </div>
 <div class="sect2">
 <h3 id="_opening_files">Opening files</h3>
-<div class="paragraph"><p>Dstat provides its own <code>dopen()</code> function to plugins. Using <code>dopen()</code> instead
+<div class="paragraph"><p>Dool provides its own <code>dopen()</code> function to plugins. Using <code>dopen()</code> instead
 of <code>open()</code> plugins do not need to reopen files to update their counters. But
 this is only useful when plugins open a few files. For eg. opening <em>/proc/pid</em>
 files the number of open files would only be increasing as the number of
@@ -1848,10 +1846,10 @@ processes increases.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_piping_to_an_application">Piping to an application</h3>
-<div class="paragraph"><p>Dstat provides its own <code>dpopen()</code> function to plugins. This function allows
+<div class="paragraph"><p>Dool provides its own <code>dpopen()</code> function to plugins. This function allows
 the plugin to open stdin, stdout and stderr pipes for 2-way communication with
-processes.  To see this in action, take a look at the <code>dstat_gpfs</code> plugins or
-the <code>dstat_mysql</code> plugins.</p></div>
+processes.  To see this in action, take a look at the <code>dool_gpfs</code> plugins or
+the <code>dool_mysql</code> plugins.</p></div>
 <div class="paragraph"><p>Piping to an application is more expensive than getting kernel counters from
 <em>/proc</em>, but it beats having to run a program and capturing the output.</p></div>
 </div>
@@ -1860,10 +1858,10 @@ the <code>dstat_mysql</code> plugins.</p></div>
 <div class="sect1">
 <h2 id="_known_issues">Known issues</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>There are some known issues that are important to understand when using Dstat.</p></div>
+<div class="paragraph"><p>There are some known issues that are important to understand when using Dool.</p></div>
 <div class="sect2">
-<h3 id="_writing_dstat_and_plugins_in_c">Writing Dstat and plugins in C</h3>
-<div class="paragraph"><p>It makes sense to reimplement Dstat or some of its plugins in C and still
+<h3 id="_writing_dool_and_plugins_in_c">Writing Dool and plugins in C</h3>
+<div class="paragraph"><p>It makes sense to reimplement Dool or some of its plugins in C and still
 allow the writing of Python (or even Perl) plugins. Tests have shown that for
 example processing <em>/proc/pid</em> in C makes the plugin 3 times faster. And this
 did not take into account the processing of the results and displaying the
@@ -1872,7 +1870,7 @@ output.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_python_1_5">Python 1.5</h3>
-<div class="paragraph"><p>There used to be a Python 1.5 version of Dstat, but with RHEL2 going out of
+<div class="paragraph"><p>There used to be a Python 1.5 version of Dool, but with RHEL2 going out of
 support in 2009 I decided to no longer spend the extra effort to sync and test
 the Dstat15 version.</p></div>
 <div class="paragraph"><p>Leaving Python 1.5 behind means that plugins do not longer have to be
@@ -1881,7 +1879,7 @@ a major overhaul was made to the plugin interface.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_counter_rollovers">Counter rollovers</h3>
-<div class="paragraph"><p>Unfortunately Dstat is susceptible for counters that &#8220;rollover&#8221;. This means
+<div class="paragraph"><p>Unfortunately Dool is susceptible for counters that &#8220;rollover&#8221;. This means
 that a counter gets bigger than its maximum value the data-structure is capable
 of storing. As a result the counter is reset.</p></div>
 <div class="paragraph"><p>For some architectures and some counters, Linux implements 32bit values, this
@@ -1890,19 +1888,19 @@ means that such counter can go up to 2^32 (= 4294967296B = 4G) values.</p></div>
 that is being transferred over the network will cause a counter reset. For
 example on a bonded 2x10Gbps interfaces that is using its theoretical transfer
 limit, this would happen every 1.6 seconds.</p></div>
-<div class="paragraph"><p>Since <em>/proc</em> is updated every second, this would be impossible for Dstat to
-catch. Currently if Dstat encounters a negative difference for an interval it
+<div class="paragraph"><p>Since <em>/proc</em> is updated every second, this would be impossible for Dool to
+catch. Currently if Dool encounters a negative difference for an interval it
 assumes a single rollover has happened and compensates for it. If that
 assumption is wrong, the user is working with wrong counters nonetheless.</p></div>
 <div class="paragraph"><p>If you suspect that the behaviour of your system is susceptible of counter
-rollovers, make sure you take this into account when using Dstat (or any other
+rollovers, make sure you take this into account when using Dool (or any other
 tool that uses these counters for that matter).</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
 <div class="title">Tip</div>
 </td>
-<td class="content">Shipped with the Dstat documentation there is a document
+<td class="content">Shipped with the Dool documentation there is a document
 (<em>counter-rollovers.txt</em>) that goes deeper into counter rollovers. If this
 affects you, read that document and contact me for possible implementation
 changes to improve handling them.</td>
@@ -1912,14 +1910,14 @@ changes to improve handling them.</td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dstat_performance">Dstat performance</h2>
+<h2 id="_dool_performance">Dool performance</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>As mentioned several times now, Dstat is written in python. There are various
+<div class="paragraph"><p>As mentioned several times now, Dool is written in python. There are various
 reasons that Python was chosen and the most important reason is that we target
 system engineers and users, so we need to simplify writing plugins, processing
 counters and lowers the bar for people to contribute changes.</p></div>
 <div class="paragraph"><p>The downside of choosing a scripting language is that it is slower than if it
-would be written in C, obviously. <strong>Dstat is not optimised for performance.</strong></p></div>
+would be written in C, obviously. <strong>Dool is not optimised for performance.</strong></p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1936,58 +1934,58 @@ plugin development.</td>
 <div class="sect2">
 <h3 id="_plugin_performance">Plugin performance</h3>
 <div class="paragraph"><p>If we look at the basic plugins, there are no real performance issues with
-Dstat. Loading Dstat takes longer to start than eg. vmstat, but once running,
-Dstat&#8217;s performance for the same functionality is up to par with vmstat,
+Dool. Loading Dool takes longer to start than eg. vmstat, but once running,
+Dool&#8217;s performance for the same functionality is up to par with vmstat,
 ifstat and other similar tools.</p></div>
 <div class="paragraph"><p>However there are <strong>some plugins that are much more resource intensive than
-others</strong> and the selection of plugins determines Dstat&#8217;s performance in a major
+others</strong> and the selection of plugins determines Dool&#8217;s performance in a major
 way.</p></div>
 </div>
 <div class="sect2">
-<h3 id="_performance_monitoring_dstat">Performance monitoring Dstat</h3>
-<div class="paragraph"><p>Dstat comes with some plugins (starting with <code>dstat_</code>) to check the overhead
+<h3 id="_performance_monitoring_dool">Performance monitoring Dool</h3>
+<div class="paragraph"><p>Dool comes with some plugins (starting with <code>dool_</code>) to check the overhead
 of itself, this together with the selection of plugins makes it very
 convenient to measure the overhead of individual plugins. The following
 options exist (as plugins):</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
---dstat
+--dool
 </dt>
 <dd>
 <p>
-Provides cputime and latency information for Dstat. This plugin can help you
-determine how accurate and how much overhead Dstat has with its current
+Provides cputime and latency information for Dool. This plugin can help you
+determine how accurate and how much overhead Dool has with its current
 plugins enabled.
 </p>
 </dd>
 <dt class="hdlist1">
---dstat-cpu
+--dool-cpu
 </dt>
 <dd>
 <p>
-Provides cpu utilization (user-space and kernel-space) statistics for Dstat.
+Provides cpu utilization (user-space and kernel-space) statistics for Dool.
 This plugin can help determine where there is some room for improvement for
-individual plugins (or Dstat itself).
+individual plugins (or Dool itself).
 </p>
 </dd>
 <dt class="hdlist1">
---dstat-ctxt
+--dool-ctxt
 </dt>
 <dd>
 <p>
-Provides context switch information for Dstat. Both voluntary as well ass
+Provides context switch information for Dool. Both voluntary as well ass
 involuntary context switches are shown, providing you with some idea of how
-the system is providing timeslices and how Dstat is returning the cpu to the
+the system is providing timeslices and how Dool is returning the cpu to the
 system.
 </p>
 </dd>
 <dt class="hdlist1">
---dstat-mem
+--dool-mem
 </dt>
 <dd>
 <p>
-Provides memory information about the Dstat process. This plugin enables
-plugin developers to determine whether Dstat is increasing its memory usage
+Provides memory information about the Dool process. This plugin enables
+plugin developers to determine whether Dool is increasing its memory usage
 and therefor is <em>leaking</em> memory over time. This plugin proved very useful in
 optimizing memory usage of the top-plugins, which typically scan all
 processes.
@@ -2009,22 +2007,22 @@ the command-line.
 </dt>
 <dd>
 <p>
-This option is not a plugin, but internal to Dstat. It will cause Dstat to
+This option is not a plugin, but internal to Dool. It will cause Dool to
 show the actual time in milliseconds from start to end at the end of each
-line. This should be more or less close to the output of the <code>dstat_dstat</code> and
-<code>dstat_dstat_cpu</code> plugins.
+line. This should be more or less close to the output of the <code>dool_dool</code> and
+<code>dool_dool_cpu</code> plugins.
 </p>
-<div class="paragraph"><p>It also influences the internal <code>dstat_time</code> plugin to show milliseconds
-instead of seconds, which may help showing the accuracy of Dstat itself.</p></div>
+<div class="paragraph"><p>It also influences the internal <code>dool_time</code> plugin to show milliseconds
+instead of seconds, which may help showing the accuracy of Dool itself.</p></div>
 </dd>
 <dt class="hdlist1">
 --profile
 </dt>
 <dd>
 <p>
-Ths option is also not a plugin, but internal to Dstat. It provides you with
+Ths option is also not a plugin, but internal to Dool. It provides you with
 detailed profiling information at the end of each run. The default settings
-can be changed inside Dstat (or a copy) to tweak the output you are looking
+can be changed inside Dool (or a copy) to tweak the output you are looking
 for. It creates a termporary profiling file in the current directory when
 running, but will clean it up after exit.
 </p>
@@ -2037,8 +2035,8 @@ running, but will clean it up after exit.
 <div class="listingblock">
 <div class="title">The cost of running the timer plugin</div>
 <div class="content">
-<pre><code>[dag@rhun dag]$ dstat -t --debug
-Module dstat_time
+<pre><code>[dag@rhun dag]$ dool -t --debug
+Module dool_time
 -----time-----
   date/time
 19-08 20:34:21  5.90ms
@@ -2049,10 +2047,10 @@ Module dstat_time
 <div class="paragraph"><p>Compare this with other plugins to see what the cost is of an individual
 plugin.</p></div>
 <div class="listingblock">
-<div class="title">The cost of running the <code>dstat_cpu</code> plugin</div>
+<div class="title">The cost of running the <code>dool_cpu</code> plugin</div>
 <div class="content">
-<pre><code>[dag@rhun dstat]$ dstat -c --debug
-Module dstat_cpu requires ['/proc/stat']
+<pre><code>[dag@rhun dool]$ dool -c --debug
+Module dool_cpu requires ['/proc/stat']
 ----total-cpu-usage----
 usr sys idl wai hiq siq
  15   3  77   4   0   1 11.07ms
@@ -2062,12 +2060,12 @@ usr sys idl wai hiq siq
 </div></div>
 <div class="paragraph"><p>As you can see, getting the CPU counters and calculating the CPU usage takes
 up 0.5 milliseconds on this particular system. But if we look at the usage of
-the <code>dstat_top_cpu</code> plugin:</p></div>
+the <code>dool_top_cpu</code> plugin:</p></div>
 <div class="listingblock">
-<div class="title">The cost of running the <code>dstat_top_cpu</code> plugin</div>
+<div class="title">The cost of running the <code>dool_top_cpu</code> plugin</div>
 <div class="content">
-<pre><code>[dag@rhun dstat]$ dstat --top-cpu --debug
-Module dstat_top_cpu
+<pre><code>[dag@rhun dool]$ dool --top-cpu --debug
+Module dool_top_cpu
 -most-expensive-
   cpu process
 Xorg           2 43.82ms
@@ -2083,7 +2081,7 @@ an additional 33ms.</p></div>
 <div class="title">Warning</div>
 </td>
 <td class="content">These values show the time it takes to process the plugins and does
-not indicate the amount of CPU usage Dstat consumes. This obviously means that
+not indicate the amount of CPU usage Dool consumes. This obviously means that
 the process time of plugins depends on how much the system is being stressed
 as well as on what the plugin exactly is doing.</td>
 </tr></table>
@@ -2091,14 +2089,14 @@ as well as on what the plugin exactly is doing.</td>
 <div class="paragraph"><p>Plugins that communicate with other processes or those that process lots of
 information (eg. communicating with the mysql client, or processing the mail
 queue) may not actually use any local resources, but the latency causes
-Dstat to slow down processing other counters.</p></div>
+Dool to slow down processing other counters.</p></div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_future_development">Future development</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>The Dstat release contains a <em>TODO</em> file highlighting all the items and
+<div class="paragraph"><p>The Dool release contains a <em>TODO</em> file highlighting all the items and
 ideas that have been played with. Here is a list of the most important ones:</p></div>
 <div class="ulist"><ul>
 <li>
@@ -2108,7 +2106,7 @@ Output
 <div class="ulist"><ul>
 <li>
 <p>
-Changes in how Dstat colours digits within a value (the 6 in 6134B)
+Changes in how Dool colours digits within a value (the 6 in 6134B)
 </p>
 </li>
 </ul></div>
@@ -2120,7 +2118,7 @@ Exporting information
 <div class="ulist"><ul>
 <li>
 <p>
-Connecting Dstat with rrdtool
+Connecting Dool with rrdtool
 </p>
 </li>
 <li>
@@ -2150,13 +2148,13 @@ Add more plugins
 </li>
 <li>
 <p>
-Redesign Dstat
+Redesign Dool
 </p>
 <div class="ulist"><ul>
 <li>
 <p>
 Create an object-model and namespace for plugins and counters so that
-     other tools can be based on Dstat
+     other tools can be based on Dool
 </p>
 </li>
 </ul></div>
@@ -2170,17 +2168,17 @@ Create an object-model and namespace for plugins and counters so that
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="http://dag.wieers.com/home-made/dstat/">Dstat homepage</a>
+<a href="http://dag.wieers.com/home-made/dool/">Dool homepage</a>
 </p>
 </li>
 <li>
 <p>
-<a href="http://svn.rpmforge.net/svn/trunk/tools/dstat/">Dstat subversion</a>
+<a href="http://svn.rpmforge.net/svn/trunk/tools/dool/">Dool subversion</a>
 </p>
 </li>
 <li>
 <p>
-<a href="http://lists.rpmforge.net/mailman/listinfo/tools">Dstat mailinglist</a>
+<a href="http://lists.rpmforge.net/mailman/listinfo/tools">Dool mailinglist</a>
 </p>
 </li>
 </ul></div>
@@ -2190,7 +2188,7 @@ Create an object-model and namespace for plugins and counters so that
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-04 14:07:27 CEST
+Last updated 2022-04-13 15:27:03 PDT
 </div>
 </div>
 </body>

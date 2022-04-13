@@ -1,11 +1,11 @@
-### Dstat most expensive process plugin
+### Dool most expensive process plugin
 ### Displays the name of the most expensive process
 ###
 ### Authority: dag@wieers.com
 
 global cpunr
 
-class dstat_plugin(dstat):
+class dool_plugin(dool):
     def __init__(self):
         self.name = 'most waiting for'
         self.vars = ('child process',)
