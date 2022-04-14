@@ -1,5 +1,5 @@
 name    = dool
-version = $(shell awk '/^Version: / {print $$2}' $(name).spec)
+version = $(shell awk '/^Version: / {print $$2}' packaging/rpm/$(name).spec)
 
 prefix     = /usr
 sysconfdir = /etc
