@@ -1792,33 +1792,49 @@ class dool_zones(dool):
 
 ### END STATS DEFINITIONS ###
 
+def fcolor(num):
+   ret = "\033[38;5;" + str(num) + "m"
+
+   return ret
+
+def bgcolor(num):
+   ret = "\033[48;5;" + str(num) + "m"
+
+   return ret
+
 color = {
-    'black'      : '\033[0;30m',
-    'darkred'    : '\033[0;31m',
-    'darkgreen'  : '\033[0;32m',
-    'darkyellow' : '\033[0;33m',
-    'darkblue'   : '\033[0;34m',
-    'darkmagenta': '\033[0;35m',
-    'darkcyan'   : '\033[0;36m',
-    'gray'       : '\033[0;37m',
+     'black': fcolor(0),
+     'white': fcolor(15),
 
-    'darkgray'   : '\033[1;30m',
-    'red'        : '\033[1;31m',
-    'green'      : '\033[1;32m',
-    'yellow'     : '\033[1;33m',
-    'blue'       : '\033[1;34m',
-    'magenta'    : '\033[1;35m',
-    'cyan'       : '\033[1;36m',
-    'white'      : '\033[1;37m',
+     'red'    : fcolor(9),
+     'darkred': fcolor(88),
 
-    'blackbg'    : '\033[40m',
-    'redbg'      : '\033[41m',
-    'greenbg'    : '\033[42m',
-    'yellowbg'   : '\033[43m',
-    'bluebg'     : '\033[44m',
-    'magentabg'  : '\033[45m',
-    'cyanbg'     : '\033[46m',
-    'whitebg'    : '\033[47m',
+     'blue'    : fcolor(51),
+     'darkblue': fcolor(39),
+
+     'green'    : fcolor(83),
+     'darkgreen': fcolor(28),
+
+     'yellow'    : fcolor(227),
+     'darkyellow': fcolor(214),
+
+     'gray'    : fcolor(7),
+     'darkgray': fcolor(239),
+
+     'magenta'    : fcolor(13),
+     'darkmagenta': fcolor(5),
+
+     'cyan'     : fcolor(14),
+     'darkcyan' : fcolor(5),
+
+     'blackbg'  : '\033[40m',
+     'redbg'    : '\033[41m',
+     'greenbg'  : '\033[42m',
+     'yellowbg' : '\033[43m',
+     'bluebg'   : '\033[44m',
+     'magentabg': '\033[45m',
+     'cyanbg'   : '\033[46m',
+     'whitebg'  : '\033[47m',
 }
 
 ansi = {
@@ -1893,15 +1909,14 @@ def set_theme():
             'done_hi'   : color['gray'],
             'text_lo'   : color['gray'],
             'text_hi'   : color['darkgray'],
-            'unit_lo'   : color['darkgray'],
+            'unit_lo'   : color['gray'],
             'unit_hi'   : color['darkgray'],
             'colors_lo' : (color['red'], color['yellow'], color['green'], color['blue'],
                           color['cyan'], color['white'], color['darkred'], color['darkgreen']),
-            'colors_hi': (color['darkred'], color['darkyellow'], color['darkgreen'], color['darkblue'],
+            'colors_hi' : (color['darkred'], color['darkyellow'], color['darkgreen'], color['darkblue'],
                           color['darkcyan'], color['gray'], color['red'], color['green']),
         }
     return theme
-
 
 def ticks():
     "Return the number of 'ticks' since bootup"
