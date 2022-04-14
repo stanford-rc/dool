@@ -10,7 +10,7 @@ License: GPL
 Group: System Environment/Base
 URL: https://github.com/scottchiefbaker/dool
 
-Source: https://github.com/scottchiefbaker/dool/releases/dool-%{version}.tar.gz
+Source: https://github.com/scottchiefbaker/dool/releases/dool-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildArch: noarch
